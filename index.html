@@ -1,17 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>পরীক্ষা কেন্দ্র</title>
+<title>Created By:AR Bijoy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* ============================================================
-     ধাপ ১: রং ও ফন্ট টোকেন
-     ============================================================ */
   :root{
     --ink:#20304a;
     --ink-soft:#3c4d6b;
@@ -45,16 +41,9 @@
       --bad-line:#e07878;
     }
   }
-  :root[data-theme="dark"]{
-    --ink:#eef1f6; --ink-soft:#b9c2d4; --paper:#141b28; --paper-card:#1c2534;
-    --line: rgba(238,241,246,0.14);
-    --shadow: 0 1px 0 rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
-    --ok-bg: rgba(93,196,140,0.14); --ok-line:#5dc48c;
-    --bad-bg: rgba(224,120,120,0.14); --bad-line:#e07878;
-  }
 
   *{box-sizing:border-box;}
-  html{ scroll-padding-top: env(safe-area-inset-top, 0px); }
+  html{ scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
   html,body{height:100%;}
   body{
     margin:0;
@@ -67,7 +56,6 @@
   }
   h1,h2,h3{ font-family: var(--serif); font-weight:600; margin:0; }
   .wrap{ max-width: 780px; margin:0 auto; padding: 28px 20px 60px; }
-  .overflow-x{ overflow-x:auto; }
 
   /* ---------- টপবার ---------- */
   .topbar{
@@ -92,23 +80,21 @@
   .brand-text{ font-family: var(--serif); font-size: 19px; letter-spacing:0.2px; }
   .brand-sub{ font-size:11.5px; color:#c7cfe0; margin-top:1px; }
 
+  /* ---------- ব্যাক বাটন ---------- */
+  .back-btn{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:8px 14px; margin-bottom:20px;
+    background:var(--paper-card); border:1px solid var(--line);
+    border-radius:8px; cursor:pointer; font-size:14px;
+    color:var(--ink); font-family:var(--sans);
+    transition: transform .12s ease;
+  }
+  .back-btn:hover{ transform: translateX(-3px); }
+
   /* ---------- হোম স্ক্রিন ---------- */
   .lede{ margin: 22px 0 26px; }
   .lede h2{ font-size: 26px; line-height:1.3; }
   .lede p{ color:var(--ink-soft); margin-top:8px; font-size:15px; max-width:60ch; }
-
-  .name-card{
-    background:var(--paper-card); border:1px solid var(--line);
-    border-radius:10px; padding:16px 18px; box-shadow: var(--shadow);
-    margin-bottom: 26px;
-  }
-  .name-card label{ font-size:13.5px; color:var(--ink-soft); display:block; margin-bottom:8px; }
-  .name-card input{
-    width:100%; padding:11px 12px; font-size:16px; font-family:var(--sans);
-    border:1px solid var(--line); border-radius:7px; background:var(--paper);
-    color:var(--ink);
-  }
-  .name-card input:focus{ outline:2px solid var(--accent-blue); outline-offset:1px; }
 
   .subject-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   @media (max-width: 520px){ .subject-grid{ grid-template-columns: 1fr; } }
@@ -123,10 +109,30 @@
     transition: transform .12s ease;
   }
   .subject-card:hover{ transform: translateY(-2px); }
-  .subject-card:focus-visible{ outline:2px solid var(--accent-blue); outline-offset:2px; }
   .subject-card h3{ font-size:18.5px; }
   .subject-meta{ margin-top:8px; font-size:13px; color:var(--ink-soft); display:flex; gap:10px; flex-wrap:wrap; }
   .pill{ background: var(--paper); border:1px solid var(--line); border-radius:20px; padding:3px 10px; }
+
+  /* ---------- নাম ইনপুট মডাল ---------- */
+  .modal-overlay{
+    position:fixed; top:0; left:0; right:0; bottom:0;
+    background:rgba(0,0,0,0.5); z-index:100;
+    display:flex; align-items:center; justify-content:center;
+    padding:20px;
+  }
+  .modal{
+    background:var(--paper-card); border:1px solid var(--line);
+    border-radius:12px; padding:24px; box-shadow: var(--shadow);
+    max-width:400px; width:100%;
+  }
+  .modal h3{ font-size:20px; margin-bottom:16px; }
+  .modal label{ font-size:13.5px; color:var(--ink-soft); display:block; margin-bottom:8px; }
+  .modal input{
+    width:100%; padding:11px 12px; font-size:16px; font-family:var(--sans);
+    border:1px solid var(--line); border-radius:7px; background:var(--paper);
+    color:var(--ink); margin-bottom:16px;
+  }
+  .modal-buttons{ display:flex; gap:10px; justify-content:flex-end; }
 
   /* ---------- exam স্ক্রিন ---------- */
   .exam-head{
@@ -145,18 +151,10 @@
   .progress-track{ height:6px; background:var(--line); border-radius:4px; overflow:hidden; margin-bottom:18px; }
   .progress-fill{ height:100%; background: var(--accent-gold); transition: width .25s ease; }
 
-  .qpalette{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom:20px; }
-  .qpalette button{
-    width:32px; height:32px; border-radius:7px; border:1px solid var(--line);
-    background:var(--paper-card); color:var(--ink); font-size:13px; cursor:pointer;
-    font-family: var(--sans);
-  }
-  .qpalette button.answered{ background: var(--ok-bg); border-color: var(--ok-line); }
-  .qpalette button.current{ outline:2px solid var(--accent-blue); outline-offset:1px; font-weight:700; }
-
   .question-card{
     background:var(--paper-card); border:1px solid var(--line); border-radius:12px;
     padding:22px 20px; box-shadow: var(--shadow); margin-bottom:18px;
+    scroll-margin-top: 80px;
   }
   .qnum{ font-size:13px; color:var(--ink-soft); margin-bottom:8px; }
   .qtext{ font-size:18px; line-height:1.55; margin-bottom:18px; }
@@ -167,6 +165,11 @@
     padding:12px 13px; margin-bottom:9px;
     border:1px solid var(--line); border-radius:8px;
     background:var(--paper); color:var(--ink); font-family:var(--sans); font-size:15.5px;
+    transition: all 0.2s ease;
+  }
+  .option:hover{
+    border-color: var(--ink-soft);
+    transform: translateX(2px);
   }
   .option .opt-tag{
     flex-shrink:0; width:24px; height:24px; border-radius:50%;
@@ -175,7 +178,6 @@
   }
   .option.selected{ border-color: var(--accent-blue); background: rgba(44,92,138,0.09); }
   .option.selected .opt-tag{ background:var(--accent-blue); border-color:var(--accent-blue); color:#fff; }
-  .option:focus-visible{ outline:2px solid var(--accent-blue); outline-offset:2px; }
 
   .nav-row{ display:flex; justify-content:space-between; gap:10px; margin-top:6px; flex-wrap:wrap; }
   .page-label{ font-size:13.5px; color:var(--ink-soft); text-align:center; margin:-8px 0 14px; }
@@ -183,16 +185,13 @@
     font-family: var(--sans); font-size:15px; font-weight:600;
     padding:11px 18px; border-radius:8px; border:1px solid var(--line);
     background:var(--paper-card); color:var(--ink); cursor:pointer;
+    transition: all 0.2s ease;
   }
-  .btn:focus-visible{ outline:2px solid var(--accent-blue); outline-offset:2px; }
+  .btn:hover:not(:disabled){ transform: translateY(-1px); box-shadow: var(--shadow); }
   .btn-primary{ background:var(--ink); color:var(--paper-card); border-color:var(--ink); }
   .btn-submit{ background:var(--accent-green); color:#fff; border-color:var(--accent-green); }
   .btn-ghost{ background:transparent; }
   .btn:disabled{ opacity:.4; cursor:not-allowed; }
-  .exam-footer{
-    position:sticky; bottom:0; padding: 12px 0 calc(12px + env(safe-area-inset-bottom,0px));
-    background: linear-gradient(to top, var(--paper) 70%, transparent);
-  }
 
   /* ---------- result স্ক্রিন ---------- */
   .score-card{
@@ -225,21 +224,6 @@
 
   .footnote{ font-size:12.5px; color:var(--ink-soft); margin-top:26px; line-height:1.6; }
   [hidden]{ display:none !important; }
-  
-  /* Timer setting card */
-  .timer-card{
-    background:var(--paper-card); border:1px solid var(--line);
-    border-radius:10px; padding:16px 18px; box-shadow: var(--shadow);
-    margin-bottom: 26px;
-  }
-  .timer-card label{ font-size:13.5px; color:var(--ink-soft); display:block; margin-bottom:8px; }
-  .timer-card input{
-    width:100%; padding:11px 12px; font-size:16px; font-family:var(--sans);
-    border:1px solid var(--line); border-radius:7px; background:var(--paper);
-    color:var(--ink);
-  }
-  .timer-card input:focus{ outline:2px solid var(--accent-blue); outline-offset:1px; }
-  .timer-hint{ font-size:12px; color:var(--ink-soft); margin-top:6px; }
 </style>
 </head>
 <body>
@@ -247,9 +231,9 @@
 <div class="topbar">
   <div class="topbar-inner">
     <div class="brand">
-      <div class="seal">প</div>
+      <div class="seal">Bijoy</div>
       <div>
-        <div class="brand-text">পরীক্ষা কেন্দ্র</div>
+        <div class="brand-text">Created By: AR Bijoy</div>
         <div class="brand-sub" id="topSub">সাবজেক্ট বেছে নিয়ে পরীক্ষা শুরু করো</div>
       </div>
     </div>
@@ -258,43 +242,42 @@
 
 <div class="wrap">
 
-  <!-- ============================================================
-       স্ক্রিন ১: হোম — সাবজেক্ট লিস্ট
-  ============================================================ -->
-  <section id="screen-home">
+  <!-- স্ক্রিন ১: সাবজেক্ট লিস্ট -->
+  <section id="screen-subjects">
     <div class="lede">
       <h2>তোমার সাবজেক্ট বেছে নাও</h2>
-      <p>প্রতিটা সাবজেক্টে কয়েকটা MCQ প্রশ্ন আছে। শুরু করার আগে নিচে তোমার নাম লিখে দাও এবং পরীক্ষার সময় সেট করো।</p>
+      <p>প্রতিটা সাবজেক্টে বিভিন্ন অধ্যায় এবং পরীক্ষা আছে। তোমার পছন্দের সাবজেক্ট বেছে নাও।</p>
     </div>
-
-    <div class="name-card">
-      <label for="studentName">তোমার নাম</label>
-      <input id="studentName" type="text" placeholder="যেমন: রাফসান আহমেদ" autocomplete="name">
-    </div>
-
-    <div class="timer-card">
-      <label for="examDuration">পরীক্ষার সময় (মিনিট)</label>
-      <input id="examDuration" type="number" min="1" max="180" value="30" placeholder="30">
-      <div class="timer-hint">যেকোনো সময় ১ থেকে ১৮০ মিনিট পর্যন্ত সেট করতে পারো</div>
-    </div>
-
     <div class="subject-grid" id="subjectGrid"></div>
-
-    <p class="footnote">
-      সততার সাথে পরীক্ষা দাও। প্রশ্ন উত্তর দেখার জন্য ব্রাউজারের সোর্স কোড ব্যবহার করা থেকে বিরত থাকো।
-    </p>
   </section>
 
-  <!-- ============================================================
-       স্ক্রিন ২: পরীক্ষা চলাকালীন
-  ============================================================ -->
+  <!-- স্ক্রিন ২: অধ্যায় লিস্ট -->
+  <section id="screen-chapters" hidden>
+    <button class="back-btn" id="backToSubjects">← সাবজেক্টে ফিরে যাও</button>
+    <div class="lede">
+      <h2 id="chapterSubjectName"></h2>
+      <p>নিচের অধ্যায়গুলো থেকে একটি বেছে নাও</p>
+    </div>
+    <div class="subject-grid" id="chapterGrid"></div>
+  </section>
+
+  <!-- স্ক্রিন ৩: পরীক্ষা লিস্ট -->
+  <section id="screen-exams" hidden>
+    <button class="back-btn" id="backToChapters">← অধ্যায়ে ফিরে যাও</button>
+    <div class="lede">
+      <h2 id="examChapterName"></h2>
+      <p>নিচের পরীক্ষাগুলো থেকে একটি বেছে নাও</p>
+    </div>
+    <div class="subject-grid" id="examGrid"></div>
+  </section>
+
+  <!-- স্ক্রিন ৪: পরীক্ষা চলাকালীন -->
   <section id="screen-exam" hidden>
     <div class="exam-head">
       <h2 class="subject-name" id="examSubjectName"></h2>
       <div class="timer" id="timerBox">⏱ <span id="timerText">--:--</span></div>
     </div>
     <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-    <div class="qpalette" id="qPalette"></div>
 
     <div id="questionsContainer"></div>
 
@@ -307,9 +290,7 @@
     </div>
   </section>
 
-  <!-- ============================================================
-       স্ক্রিন ৩: ফলাফল
-  ============================================================ -->
+  <!-- স্ক্রিন ৫: ফলাফল -->
   <section id="screen-result" hidden>
     <div class="score-card">
       <div class="score-big" id="scoreBig">০ / ০</div>
@@ -320,7 +301,7 @@
     <div class="action-row">
       <button class="btn btn-primary" id="btnCopyResult">ফলাফল কপি করো</button>
       <a class="btn" id="btnWhatsapp" href="#" target="_blank" rel="noopener" hidden>WhatsApp-এ পাঠাও</a>
-      <button class="btn btn-ghost" id="btnHome">← সাবজেক্ট লিস্টে ফিরে যাও</button>
+      <button class="btn btn-ghost" id="btnHome">← হোমে ফিরে যাও</button>
     </div>
 
     <h3 style="margin-bottom:12px; font-size:17px;">উত্তরপত্র পর্যালোচনা</h3>
@@ -329,109 +310,148 @@
 
 </div>
 
+<!-- নাম ইনপুট মডাল -->
+<div class="modal-overlay" id="nameModal" hidden>
+  <div class="modal">
+    <h3>পরীক্ষা শুরু করার আগে</h3>
+    <label for="studentName">তোমার নাম লিখো</label>
+    <input id="studentName" type="text" placeholder="যেমন: Bijoy" autocomplete="name">
+    <div class="modal-buttons">
+      <button class="btn btn-ghost" id="btnCancelName">বাতিল</button>
+      <button class="btn btn-primary" id="btnStartExam">পরীক্ষা শুরু করো</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
 /* ================================================================
-   ধাপ ২: এখানে প্রশ্ন ও সাবজেক্ট যোগ/এডিট করো
+   পরীক্ষার ডেটা স্ট্রাকচার
 ================================================================ */
 const examData = {
-  "আইসিটি - সংখ্যা পদ্ধতি": {
-    questions: [
-      { q: "দশমিক সংখ্যা 10 এর বাইনারি মান কত?", options: ["1010","1001","1100","1000"], answer: 0 },
-      { q: "বাইনারি সংখ্যা 1101 এর দশমিক মান কত?", options: ["11","12","13","14"], answer: 2 },
-      { q: "অক্টাল সংখ্যা 12 এর দশমিক মান কত?", options: ["8","10","12","14"], answer: 1 },
-      { q: "হেক্সাডেসিমেল সংখ্যা F এর দশমিক মান কত?", options: ["14","15","16","17"], answer: 1 },
-      { q: "দশমিক সংখ্যা 8 এর বাইনারি মান কত?", options: ["1000","0111","1001","1010"], answer: 0 },
-      { q: "বাইনারি সংখ্যা 1111 এর দশমিক মান কত?", options: ["14","15","16","17"], answer: 1 },
-      { q: "দশমিক সংখ্যা 16 এর হেক্সাডেসিমেল মান কত?", options: ["F","10","11","A"], answer: 1 },
-      { q: "অক্টাল সংখ্যা 7 এর বাইনারি মান কত?", options: ["111","110","101","100"], answer: 0 },
-      { q: "বাইনারি সংখ্যা 101 এর দশমিক মান কত?", options: ["4","5","6","7"], answer: 1 },
-      { q: "দশমিক সংখ্যা 15 এর হেক্সাডেসিমেল মান কত?", options: ["E","F","10","D"], answer: 1 },
-      { q: "হেক্সাডেসিমেল সংখ্যা A এর দশমিক মান কত?", options: ["8","9","10","11"], answer: 2 },
-      { q: "বাইনারি সংখ্যা 10000 এর দশমিক মান কত?", options: ["15","16","17","18"], answer: 1 },
-      { q: "দশমিক সংখ্যা 20 এর বাইনারি মান কত?", options: ["10100","10010","11000","10000"], answer: 0 },
-      { q: "অক্টাল সংখ্যা 17 এর দশমিক মান কত?", options: ["13","14","15","16"], answer: 2 },
-      { q: "বাইনারি সংখ্যা 1001 এর দশমিক মান কত?", options: ["7","8","9","10"], answer: 2 },
-      { q: "দশমিক সংখ্যা 7 এর বাইনারি মান কত?", options: ["110","111","101","100"], answer: 1 },
-      { q: "হেক্সাডেসিমেল সংখ্যা 1A এর দশমিক মান কত?", options: ["24","25","26","27"], answer: 2 },
-      { q: "বাইনারি সংখ্যা 11111 এর দশমিক মান কত?", options: ["30","31","32","33"], answer: 1 },
-      { q: "দশমিক সংখ্যা 25 এর অক্টাল মান কত?", options: ["30","31","32","33"], answer: 1 },
-      { q: "অক্টাল সংখ্যা 20 এর দশমিক মান কত?", options: ["14","15","16","17"], answer: 2 },
-      { q: "বাইনারি সংখ্যা 100 এর দশমিক মান কত?", options: ["3","4","5","6"], answer: 1 },
-      { q: "দশমিক সংখ্যা 31 এর বাইনারি মান কত?", options: ["11110","11111","10000","11011"], answer: 1 },
-      { q: "হেক্সাডেসিমেল সংখ্যা C এর দশমিক মান কত?", options: ["10","11","12","13"], answer: 2 },
-      { q: "বাইনারি সংখ্যা 110 এর দশমিক মান কত?", options: ["5","6","7","8"], answer: 1 },
-      { q: "দশমিক সংখ্যা 64 এর বাইনারি মান কত?", options: ["1000000","111111","1000001","100000"], answer: 0 },
-      { q: "অক্টাল সংখ্যা 77 এর দশমিক মান কত?", options: ["61","62","63","64"], answer: 2 },
-      { q: "বাইনারি সংখ্যা 10101 এর দশমিক মান কত?", options: ["19","20","21","22"], answer: 2 },
-      { q: "হেক্সাডেসিমেল সংখ্যা 20 এর দশমিক মান কত?", options: ["30","31","32","33"], answer: 2 },
-      { q: "দশমিক সংখ্যা 5 এর বাইনারি মান কত?", options: ["100","101","110","111"], answer: 1 },
-      { q: "বাইনারি সংখ্যা 11011 এর দশমিক মান কত?", options: ["25","26","27","28"], answer: 2 }
-    ]
-  },
-  "ইংরেজি": {
-    questions: [
-      { q: "Choose the correct sentence:", options: ["He go to school.","He goes to school.","He going to school.","He gone to school."], answer: 1 },
-      { q: "The synonym of 'Happy' is —", options: ["Sad","Angry","Joyful","Tired"], answer: 2 },
-      { q: "Fill in the blank: She ___ a book yesterday.", options: ["read","reads","reading","has read"], answer: 0 },
-      { q: "The antonym of 'Ancient' is —", options: ["Old","Modern","Historic","Classic"], answer: 1 },
-      { q: "Which one is a preposition?", options: ["Quickly","Under","Beautiful","Run"], answer: 1 },
-      { q: "What is the past tense of 'go'?", options: ["Goes","Going","Went","Gone"], answer: 2 },
-      { q: "Which word is a noun?", options: ["Run","Beautiful","Happiness","Quickly"], answer: 2 },
-      { q: "The plural of 'child' is —", options: ["Childs","Children","Childes","Childer"], answer: 1 },
-      { q: "Choose the correct spelling:", options: ["Recieve","Receive","Receve","Receiv"], answer: 1 },
-      { q: "What does 'rapidly' mean?", options: ["Slowly","Quickly","Carefully","Quietly"], answer: 1 }
-    ]
+  "আইসিটি": {
+    chapters: {
+      "অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি": {
+        exams: {
+          "পরীক্ষা ১": {
+            examTime: 10,
+            questions: [
+              { q: "ICT এর পূর্ণরূপ কী?", options: ["Information and Communication Technology","Internet and Computer Technology","Information and Computer Transmission","Internet Communication Technology"], answer: 0 },
+              { q: "কম্পিউটার কোন যন্ত্র?", options: ["যান্ত্রিক","ইলেকট্রনিক","তড়িৎ","চৌম্বক"], answer: 1 },
+              { q: "প্রথম কম্পিউটারের নাম কী?", options: ["ENIAC","EDVAC","UNIVAC","Mark-I"], answer: 0 },
+              { q: "কম্পিউটারের মস্তিষ্ক বলা হয় কাকে?", options: ["RAM","ROM","CPU","Hard Disk"], answer: 2 },
+              { q: "১ কিলোবাইট = কত বাইট?", options: ["১০০০","১০২৪","১০০","৫১২"], answer: 1 },
+              { q: "ইন্টারনেট কত সালে চালু হয়?", options: ["১৯৬৯","১৯৮৯","১৯৯৯","২০০০"], answer: 0 },
+              { q: "WWW এর পূর্ণরূপ কী?", options: ["World Wide Web","World Web Width","Wide World Web","Web World Wide"], answer: 0 },
+              { q: "প্রথম ওয়েব ব্রাউজার কোনটি?", options: ["Internet Explorer","Netscape","Mosaic","Chrome"], answer: 2 },
+              { q: "HTTP এর পূর্ণরূপ কী?", options: ["HyperText Transfer Protocol","High Transfer Text Protocol","HyperText Transmission Protocol","High Text Transfer Protocol"], answer: 0 },
+              { q: "ই-মেইল আবিষ্কার করেন কে?", options: ["বিল গেটস","স্টিভ জবস","রে টমলিনসন","টিম বার্নার্স লি"], answer: 2 }
+            ]
+          },
+          "পরীক্ষা ২": {
+            questions: [
+              { q: "সফটওয়্যার কত প্রকার?", options: ["২","৩","৪","৫"], answer: 0 },
+              { q: "MS Word কোন ধরনের সফটওয়্যার?", options: ["System Software","Application Software","Utility Software","Programming Software"], answer: 1 },
+              { q: "অপারেটিং সিস্টেম কোনটি?", options: ["MS Word","Windows","Photoshop","Chrome"], answer: 1 },
+              { q: "Linux কোন ধরনের সফটওয়্যার?", options: ["Paid","Open Source","Trial","Shareware"], answer: 1 },
+              { q: "প্রোগ্রামিং ভাষা কোনটি?", options: ["Python","Windows","Excel","Chrome"], answer: 0 }
+            ]
+          }
+        }
+      },
+      "অধ্যায় ২: সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস": {
+        exams: {
+          "পরীক্ষা ১": {
+            examTime: 30,
+            questions: [
+              { q: "দশমিক সংখ্যা 10 এর বাইনারি মান কত?", options: ["1010","1001","1100","1000"], answer: 0 },
+              { q: "বাইনারি সংখ্যা 1101 এর দশমিক মান কত?", options: ["11","12","13","14"], answer: 2 },
+              { q: "অক্টাল সংখ্যা 12 এর দশমিক মান কত?", options: ["8","10","12","14"], answer: 1 },
+              { q: "হেক্সাডেসিমেল সংখ্যা F এর দশমিক মান কত?", options: ["14","15","16","17"], answer: 1 },
+              { q: "দশমিক সংখ্যা 8 এর বাইনারি মান কত?", options: ["1000","0111","1001","1010"], answer: 0 },
+              { q: "বাইনারি সংখ্যা 1111 এর দশমিক মান কত?", options: ["14","15","16","17"], answer: 1 },
+              { q: "দশমিক সংখ্যা 16 এর হেক্সাডেসিমেল মান কত?", options: ["F","10","11","A"], answer: 1 },
+              { q: "অক্টাল সংখ্যা 7 এর বাইনারি মান কত?", options: ["111","110","101","100"], answer: 0 },
+              { q: "বাইনারি সংখ্যা 101 এর দশমিক মান কত?", options: ["4","5","6","7"], answer: 1 },
+              { q: "দশমিক সংখ্যা 15 এর হেক্সাডেসিমেল মান কত?", options: ["E","F","10","D"], answer: 1 }
+            ]
+          }
+        }
+      }
+    }
   },
   "গণিত": {
-    questions: [
-      { q: "২৫ এর বর্গমূল কত?", options: ["৪","৫","৬","৭"], answer: 1 },
-      { q: "১২ এবং ১৮ এর গ.সা.গু কত?", options: ["২","৩","৬","৯"], answer: 2 },
-      { q: "একটি ত্রিভুজের কোণ তিনটির সমষ্টি কত ডিগ্রি?", options: ["৯০°","১৮০°","২৭০°","৩৬০°"], answer: 1 },
-      { q: "৭ × ৮ = কত?", options: ["৫৪","৫৬","৫৮","৬৪"], answer: 1 },
-      { q: "১ থেকে ১০ পর্যন্ত জোড় সংখ্যা কয়টি?", options: ["৪","৫","৬","৩"], answer: 1 },
-      { q: "৯ এর বর্গ কত?", options: ["৭২","৮১","৯০","৯৯"], answer: 1 },
-      { q: "একটি বৃত্তের পরিধি নির্ণয়ের সূত্র কোনটি?", options: ["πr","2πr","πr²","2πr²"], answer: 1 },
-      { q: "১০০ এর ২০% কত?", options: ["১০","২০","৩০","৪০"], answer: 1 },
-      { q: "২ + ২ × ২ = কত?", options: ["৬","৮","৪","১০"], answer: 0 },
-      { q: "একটি আয়তক্ষেত্রের ক্ষেত্রফল = ?", options: ["দৈর্ঘ্য + প্রস্থ","দৈর্ঘ্য × প্রস্থ","২(দৈর্ঘ্য + প্রস্থ)","দৈর্ঘ্য ÷ প্রস্থ"], answer: 1 }
-    ]
+    chapters: {
+      "অধ্যায় ১: বীজগণিত": {
+        exams: {
+          "পরীক্ষা ১": {
+            examTime: 15,
+            questions: [
+              { q: "২৫ এর বর্গমূল কত?", options: ["৪","৫","৬","৭"], answer: 1 },
+              { q: "৯ এর বর্গ কত?", options: ["৭২","৮১","৯০","৯৯"], answer: 1 },
+              { q: "২ + ২ × ২ = কত?", options: ["৬","৮","৪","১০"], answer: 0 },
+              { q: "১০০ এর ২০% কত?", options: ["১০","২০","৩০","৪০"], answer: 1 },
+              { q: "৭ × ৮ = কত?", options: ["৫৪","৫৬","৫৮","৬৪"], answer: 1 }
+            ]
+          }
+        }
+      },
+      "অধ্যায় ২: জ্যামিতি": {
+        exams: {
+          "পরীক্ষা ১": {
+            questions: [
+              { q: "১২ এবং ১৮ এর গ.সা.গু কত?", options: ["২","৩","৬","৯"], answer: 2 },
+              { q: "একটি ত্রিভুজের কোণ তিনটির সমষ্টি কত ডিগ্রি?", options: ["৯০°","১৮০°","২৭০°","৩৬০°"], answer: 1 },
+              { q: "একটি বৃত্তের পরিধি নির্ণয়ের সূত্র কোনটি?", options: ["πr","2πr","πr²","2πr²"], answer: 1 },
+              { q: "একটি আয়তক্ষেত্রের ক্ষেত্রফল = ?", options: ["দৈর্ঘ্য + প্রস্থ","দৈর্ঘ্য × প্রস্থ","২(দৈর্ঘ্য + প্রস্থ)","দৈর্ঘ্য ÷ প্রস্থ"], answer: 1 }
+            ]
+          }
+        }
+      }
+    }
   },
   "বিজ্ঞান": {
-    questions: [
-      { q: "উদ্ভিদ কোন প্রক্রিয়ায় খাদ্য তৈরি করে?", options: ["শ্বসন","সালোকসংশ্লেষণ","প্রস্বেদন","পরাগায়ন"], answer: 1 },
-      { q: "মানুষের হৃৎপিণ্ডে কয়টি প্রকোষ্ঠ থাকে?", options: ["২টি","৩টি","৪টি","৫টি"], answer: 2 },
-      { q: "পানির রাসায়নিক সংকেত কী?", options: ["CO2","H2O","O2","NaCl"], answer: 1 },
-      { q: "পৃথিবীর নিকটতম গ্রহ কোনটি?", options: ["মঙ্গল","শুক্র","বৃহস্পতি","শনি"], answer: 1 },
-      { q: "আলোর গতি প্রায় কত?", options: ["৩ লক্ষ কিমি/সে","৩ হাজার কিমি/সে","৩০ কিমি/সে","৩ কোটি কিমি/সে"], answer: 0 },
-      { q: "মানবদেহে কত টি হাড় আছে?", options: ["১০৬","২০৬","৩০৬","৪০৬"], answer: 1 },
-      { q: "কোনটি নবায়নযোগ্য শক্তি?", options: ["কয়লা","সৌরশক্তি","প্রাকৃতিক গ্যাস","পেট্রোল"], answer: 1 },
-      { q: "রক্তের লোহিত কণিকার কাজ কী?", options: ["অক্সিজেন পরিবহন","রোগ প্রতিরোধ","রক্ত জমাট বাঁধা","পুষ্টি পরিবহন"], answer: 0 },
-      { q: "পৃথিবীতে কত শতাংশ জল আছে?", options: ["৫০%","৬০%","৭১%","৮০%"], answer: 2 },
-      { q: "কোন গ্যাস গ্রিনহাউস প্রভাব সৃষ্টি করে?", options: ["অক্সিজেন","নাইট্রোজেন","কার্বন ডাই অক্সাইড","হাইড্রোজেন"], answer: 2 }
-    ]
+    chapters: {
+      "অধ্যায় ১: উদ্ভিদবিজ্ঞান": {
+        exams: {
+          "পরীক্ষা ১": {
+            examTime: 10,
+            questions: [
+              { q: "উদ্ভিদ কোন প্রক্রিয়ায় খাদ্য তৈরি করে?", options: ["শ্বসন","সালোকসংশ্লেষণ","প্রস্বেদন","পরাগায়ন"], answer: 1 },
+              { q: "পানির রাসায়নিক সংকেত কী?", options: ["CO2","H2O","O2","NaCl"], answer: 1 },
+              { q: "কোনটি নবায়নযোগ্য শক্তি?", options: ["কয়লা","সৌরশক্তি","প্রাকৃতিক গ্যাস","পেট্রোল"], answer: 1 },
+              { q: "পৃথিবীতে কত শতাংশ জল আছে?", options: ["৫০%","৬০%","৭১%","৮০%"], answer: 2 },
+              { q: "কোন গ্যাস গ্রিনহাউস প্রভাব সৃষ্টি করে?", options: ["অক্সিজেন","নাইট্রোজেন","কার্বন ডাই অক্সাইড","হাইড্রোজেন"], answer: 2 }
+            ]
+          }
+        }
+      },
+      "অধ্যায় ২: প্রাণিবিজ্ঞান": {
+        exams: {
+          "পরীক্ষা ১": {
+            questions: [
+              { q: "মানুষের হৃৎপিণ্ডে কয়টি প্রকোষ্ঠ থাকে?", options: ["২টি","৩টি","৪টি","৫টি"], answer: 2 },
+              { q: "মানবদেহে কত টি হাড় আছে?", options: ["১০৬","২০৬","৩০৬","৪০৬"], answer: 1 },
+              { q: "রক্তের লোহিত কণিকার কাজ কী?", options: ["অক্সিজেন পরিবহন","রোগ প্রতিরোধ","রক্ত জমাট বাঁধা","পুষ্টি পরিবহন"], answer: 0 }
+            ]
+          }
+        }
+      }
+    }
   }
 };
 
-/* ================================================================
-   WhatsApp নম্বর সেট করো (ঐচ্ছিক)
-================================================================ */
-const TEACHER_WHATSAPP_NUMBER = ""; // যেমন: "8801712345678"
-
-/* ================================================================
-   পেজ সেটিং - প্রতি পাতায় কয়টি প্রশ্ন দেখাবে
-================================================================ */
+const TEACHER_WHATSAPP_NUMBER = ""; 
 const QUESTIONS_PER_PAGE = 10;
 
-/* ================================================================
-   নিচের কোড অংশে কিছু বদলানোর দরকার নেই
-================================================================ */
 const accentPalette = ["var(--accent-blue)","var(--accent-red)","var(--accent-green)","var(--accent-plum)","var(--accent-gold)"];
-const subjectNames = Object.keys(examData);
 
 let state = { 
-  subject:null, 
+  selectedSubject: null,
+  selectedChapter: null,
+  selectedExam: null,
+  studentName: null,
   currentPage: 0,
   answers:[], 
   timeLeft:0, 
@@ -440,66 +460,151 @@ let state = {
 };
 
 const $ = (id)=>document.getElementById(id);
+
 function toast(msg){
-  const t = $("toast"); t.textContent = msg; t.classList.add("show");
+  const t = $("toast"); 
+  t.textContent = msg; 
+  t.classList.add("show");
   setTimeout(()=>t.classList.remove("show"), 1800);
 }
+
 function bnNum(n){
   const map = {"0":"০","1":"১","2":"২","3":"৩","4":"৪","5":"৫","6":"৬","7":"৭","8":"৮","9":"৯"};
   return String(n).split("").map(c=>map[c]!==undefined?map[c]:c).join("");
 }
 
-/* ---------- হোম স্ক্রিন বসানো ---------- */
-function renderHome(){
+function hideAllScreens(){
+  $("screen-subjects").hidden = true;
+  $("screen-chapters").hidden = true;
+  $("screen-exams").hidden = true;
+  $("screen-exam").hidden = true;
+  $("screen-result").hidden = true;
+}
+
+// ১. সাবজেক্ট লিস্ট রেন্ডার
+function renderSubjects(){
   const grid = $("subjectGrid");
   grid.innerHTML = "";
-  subjectNames.forEach((name,i)=>{
-    const data = examData[name];
+  const subjects = Object.keys(examData);
+  subjects.forEach((name,i)=>{
     const card = document.createElement("button");
     card.className = "subject-card";
     card.style.setProperty("--card-accent", accentPalette[i % accentPalette.length]);
+    const chapterCount = Object.keys(examData[name].chapters).length;
     card.innerHTML = `
       <h3>${name}</h3>
       <div class="subject-meta">
-        <span class="pill">${bnNum(data.questions.length)}টি প্রশ্ন</span>
+        <span class="pill">${bnNum(chapterCount)}টি অধ্যায়</span>
       </div>`;
-    card.addEventListener("click", ()=>startExam(name));
+    card.addEventListener("click", ()=>showChapters(name));
     grid.appendChild(card);
   });
 }
 
-/* ---------- পরীক্ষা শুরু ---------- */
-function startExam(subject){
+// ২. অধ্যায় লিস্ট দেখানো
+function showChapters(subject){
+  state.selectedSubject = subject;
+  hideAllScreens();
+  $("screen-chapters").hidden = false;
+  $("chapterSubjectName").textContent = subject;
+  $("topSub").textContent = subject;
+  
+  const grid = $("chapterGrid");
+  grid.innerHTML = "";
+  const chapters = Object.keys(examData[subject].chapters);
+  chapters.forEach((chapterName,i)=>{
+    const card = document.createElement("button");
+    card.className = "subject-card";
+    card.style.setProperty("--card-accent", accentPalette[i % accentPalette.length]);
+    const examCount = Object.keys(examData[subject].chapters[chapterName].exams).length;
+    card.innerHTML = `
+      <h3>${chapterName}</h3>
+      <div class="subject-meta">
+        <span class="pill">${bnNum(examCount)}টি পরীক্ষা</span>
+      </div>`;
+    card.addEventListener("click", ()=>showExams(subject, chapterName));
+    grid.appendChild(card);
+  });
+}
+
+// ৩. পরীক্ষা লিস্ট দেখানো
+function showExams(subject, chapter){
+  state.selectedChapter = chapter;
+  hideAllScreens();
+  $("screen-exams").hidden = false;
+  $("examChapterName").textContent = chapter;
+  $("topSub").textContent = subject + " → " + chapter;
+  
+  const grid = $("examGrid");
+  grid.innerHTML = "";
+  const exams = Object.keys(examData[subject].chapters[chapter].exams);
+  exams.forEach((examName,i)=>{
+    const examObj = examData[subject].chapters[chapter].exams[examName];
+    const qCount = examObj.questions.length;
+    const timeInMinutes = examObj.examTime || qCount;
+    
+    const card = document.createElement("button");
+    card.className = "subject-card";
+    card.style.setProperty("--card-accent", accentPalette[i % accentPalette.length]);
+    card.innerHTML = `
+      <h3>${examName}</h3>
+      <div class="subject-meta">
+        <span class="pill">${bnNum(qCount)}টি প্রশ্ন</span>
+        <span class="pill">${bnNum(timeInMinutes)} মিনিট</span>
+      </div>`;
+    card.addEventListener("click", ()=>askForName(subject, chapter, examName));
+    grid.appendChild(card);
+  });
+}
+
+// ৪. নাম চাওয়া
+function askForName(subject, chapter, exam){
+  state.selectedExam = exam;
+  $("nameModal").hidden = false;
+  $("studentName").value = state.studentName || "";
+  $("studentName").focus();
+}
+
+$("btnCancelName").addEventListener("click", ()=>{
+  $("nameModal").hidden = true;
+});
+
+$("btnStartExam").addEventListener("click", ()=>{
   const name = $("studentName").value.trim();
   if(!name){
     toast("আগে তোমার নাম লিখো");
     $("studentName").focus();
     return;
   }
-  
-  const duration = parseInt($("examDuration").value);
-  if(!duration || duration < 1 || duration > 180){
-    toast("সঠিক সময় দাও (১-১৮০ মিনিট)");
-    $("examDuration").focus();
-    return;
+  state.studentName = name;
+  $("nameModal").hidden = true;
+  startExam();
+});
+
+// Enter key দিয়ে পরীক্ষা শুরু
+$("studentName").addEventListener("keypress", (e)=>{
+  if(e.key === "Enter"){
+    $("btnStartExam").click();
   }
+});
+
+// ৫. পরীক্ষা শুরু
+function startExam(){
+  const examObj = examData[state.selectedSubject].chapters[state.selectedChapter].exams[state.selectedExam];
+  const questions = examObj.questions;
+  const timeInMinutes = examObj.examTime || questions.length;
   
-  const data = examData[subject];
-  state = {
-    subject, 
-    currentPage: 0,
-    answers: new Array(data.questions.length).fill(null),
-    timeLeft: duration * 60, // মিনিট থেকে সেকেন্ড
-    timerId: null, 
-    finished:false
-  };
+  state.currentPage = 0;
+  state.answers = new Array(questions.length).fill(null);
+  state.timeLeft = timeInMinutes * 60;
+  state.timerId = null;
+  state.finished = false;
   
-  $("screen-home").hidden = true;
-  $("screen-result").hidden = true;
+  hideAllScreens();
   $("screen-exam").hidden = false;
-  $("examSubjectName").textContent = subject;
-  $("topSub").textContent = name + " — " + subject;
-  renderPalette();
+  $("examSubjectName").textContent = `${state.selectedSubject} → ${state.selectedChapter} → ${state.selectedExam}`;
+  $("topSub").textContent = state.studentName;
+  
   renderPage();
   startTimer();
 }
@@ -524,36 +629,9 @@ function updateTimerText(){
   $("timerBox").classList.toggle("low", state.timeLeft <= 60);
 }
 
-function renderPalette(){
-  const data = examData[state.subject];
-  const box = $("qPalette");
-  box.innerHTML = "";
-  data.questions.forEach((_,i)=>{
-    const b = document.createElement("button");
-    b.textContent = bnNum(i+1);
-    b.addEventListener("click", ()=>{ 
-      state.currentPage = Math.floor(i / QUESTIONS_PER_PAGE);
-      renderPage(); 
-    });
-    box.appendChild(b);
-  });
-  refreshPaletteStates();
-}
-
-function refreshPaletteStates(){
-  const box = $("qPalette");
-  const startIdx = state.currentPage * QUESTIONS_PER_PAGE;
-  const endIdx = startIdx + QUESTIONS_PER_PAGE;
-  
-  [...box.children].forEach((b,i)=>{
-    b.classList.toggle("answered", state.answers[i] !== null);
-    b.classList.toggle("current", i >= startIdx && i < endIdx);
-  });
-}
-
 function renderPage(){
-  const data = examData[state.subject];
-  const total = data.questions.length;
+  const questions = examData[state.selectedSubject].chapters[state.selectedChapter].exams[state.selectedExam].questions;
+  const total = questions.length;
   const totalPages = Math.ceil(total / QUESTIONS_PER_PAGE);
   const startIdx = state.currentPage * QUESTIONS_PER_PAGE;
   const endIdx = Math.min(startIdx + QUESTIONS_PER_PAGE, total);
@@ -564,9 +642,10 @@ function renderPage(){
   const tags = ["ক","খ","গ","ঘ"];
   
   for(let i = startIdx; i < endIdx; i++){
-    const q = data.questions[i];
+    const q = questions[i];
     const qCard = document.createElement("div");
     qCard.className = "question-card";
+    qCard.id = "question-" + i;
     
     const qNumDiv = document.createElement("div");
     qNumDiv.className = "qnum";
@@ -581,10 +660,18 @@ function renderPage(){
       const b = document.createElement("button");
       b.className = "option" + (state.answers[i]===optIdx ? " selected" : "");
       b.innerHTML = `<span class="opt-tag">${tags[optIdx]}</span><span>${opt}</span>`;
-      b.addEventListener("click", ()=>{
+      b.addEventListener("click", (e)=>{
+        e.preventDefault();
         state.answers[i] = optIdx;
-        renderPage();
-        refreshPaletteStates();
+        
+        // শুধু এই প্রশ্নের অপশনগুলো আপডেট করো
+        const allOptions = optionsBox.querySelectorAll('.option');
+        allOptions.forEach(opt => opt.classList.remove('selected'));
+        b.classList.add('selected');
+        
+        // প্রগ্রেস বার আপডেট
+        const answeredCount = state.answers.filter(a => a !== null).length;
+        $("progressFill").style.width = (answeredCount/total*100)+"%";
       });
       optionsBox.appendChild(b);
     });
@@ -595,18 +682,14 @@ function renderPage(){
     container.appendChild(qCard);
   }
   
-  // Progress update
   const answeredCount = state.answers.filter(a => a !== null).length;
   $("progressFill").style.width = (answeredCount/total*100)+"%";
   
-  // Page label
   $("pageLabel").textContent = `পাতা ${bnNum(state.currentPage + 1)} / ${bnNum(totalPages)}`;
   
-  // Navigation buttons
   $("btnPrevPage").disabled = state.currentPage === 0;
   $("btnNextPage").disabled = state.currentPage >= totalPages - 1;
   
-  refreshPaletteStates();
   window.scrollTo(0, 0);
 }
 
@@ -618,8 +701,8 @@ $("btnPrevPage").addEventListener("click", ()=>{
 });
 
 $("btnNextPage").addEventListener("click", ()=>{
-  const data = examData[state.subject];
-  const totalPages = Math.ceil(data.questions.length / QUESTIONS_PER_PAGE);
+  const questions = examData[state.selectedSubject].chapters[state.selectedChapter].exams[state.selectedExam].questions;
+  const totalPages = Math.ceil(questions.length / QUESTIONS_PER_PAGE);
   if(state.currentPage < totalPages - 1){ 
     state.currentPage++; 
     renderPage(); 
@@ -641,18 +724,17 @@ function finishExam(){
   showResult();
 }
 
-/* ---------- ফলাফল স্ক্রিন ---------- */
 function showResult(){
-  const data = examData[state.subject];
-  const total = data.questions.length;
+  const questions = examData[state.selectedSubject].chapters[state.selectedChapter].exams[state.selectedExam].questions;
+  const total = questions.length;
   let correct = 0;
-  data.questions.forEach((q,i)=>{ if(state.answers[i]===q.answer) correct++; });
+  questions.forEach((q,i)=>{ if(state.answers[i]===q.answer) correct++; });
   const percent = Math.round(correct/total*100);
 
-  $("screen-exam").hidden = true;
+  hideAllScreens();
   $("screen-result").hidden = false;
   $("scoreBig").textContent = `${bnNum(correct)} / ${bnNum(total)}`;
-  $("scoreSub").textContent = `${$("studentName").value.trim()} — ${state.subject} (${bnNum(percent)}%)`;
+  $("scoreSub").textContent = `${state.studentName} — ${state.selectedSubject} (${bnNum(percent)}%)`;
 
   let remark = "আরেকটু চেষ্টা করলে ভালো হবে।";
   if(percent>=80) remark = "চমৎকার ফলাফল! 🎉";
@@ -663,7 +745,7 @@ function showResult(){
   const tags = ["ক","খ","গ","ঘ"];
   const reviewBox = $("reviewBox");
   reviewBox.innerHTML = "";
-  data.questions.forEach((q,i)=>{
+  questions.forEach((q,i)=>{
     const userAns = state.answers[i];
     const isOk = userAns === q.answer;
     const div = document.createElement("div");
@@ -679,8 +761,10 @@ function showResult(){
 
   const resultText =
 `পরীক্ষা কেন্দ্র — ফলাফল
-নাম: ${$("studentName").value.trim()}
-সাবজেক্ট: ${state.subject}
+নাম: ${state.studentName}
+সাবজেক্ট: ${state.selectedSubject}
+অধ্যায়: ${state.selectedChapter}
+পরীক্ষা: ${state.selectedExam}
 স্কোর: ${correct} / ${total} (${percent}%)`;
 
   $("btnCopyResult").onclick = ()=>{
@@ -696,12 +780,25 @@ function showResult(){
   }
 }
 
-$("btnHome").addEventListener("click", ()=>{
-  $("screen-result").hidden = true;
-  $("screen-home").hidden = false;
+// ব্যাক বাটন ইভেন্টস
+$("backToSubjects").addEventListener("click", ()=>{
+  hideAllScreens();
+  $("screen-subjects").hidden = false;
   $("topSub").textContent = "সাবজেক্ট বেছে নিয়ে পরীক্ষা শুরু করো";
 });
 
-renderHome();
+$("backToChapters").addEventListener("click", ()=>{
+  showChapters(state.selectedSubject);
+});
+
+$("btnHome").addEventListener("click", ()=>{
+  hideAllScreens();
+  $("screen-subjects").hidden = false;
+  $("topSub").textContent = "সাবজেক্ট বেছে নিয়ে পরীক্ষা শুরু করো";
+});
+
+// প্রথমে সাবজেক্ট লিস্ট দেখাও
+renderSubjects();
 </script>
 </body>
+</html>

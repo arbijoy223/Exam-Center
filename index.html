@@ -47,8 +47,8 @@ background:var(--card);border:1px solid rgba(255,255,255,.9);border-radius:22px;
 .modal input{width:100%;height:52px;padding:0 15px;border:2px solid #e5e7eb;border-radius:14px;background:#f9fafb;color:#111827;font-size:16px;outline:none}
 .modal input:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(99,91,255,.10)}
 .modal-buttons{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
-.exam-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:13px;flex-wrap:wrap}.exam-head .subject-name{font-size:21px}
-.timer{min-width:125px;justify-content:center;font-variant-numeric:tabular-nums;background:linear-gradient(135deg,#111827,#374151);color:#fff;border-radius:15px;padding:10px 16px;font-size:19px;font-weight:800;display:flex;align-items:center;gap:7px;box-shadow:0 8px 20px rgba(15,23,42,.16)}
+.exam-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:13px;flex-wrap:wrap;position:sticky;top:64px;z-index:90;padding:10px 12px;border-radius:18px;background:rgba(255,255,255,.90);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 10px 28px rgba(15,23,42,.10);border:1px solid rgba(255,255,255,.75)}.exam-head .subject-name{font-size:21px}
+.timer{min-width:150px;justify-content:center;font-variant-numeric:tabular-nums;background:linear-gradient(135deg,#0f172a,#334155);color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:10px 16px;font-size:18px;font-weight:800;display:flex;align-items:center;gap:9px;box-shadow:0 10px 24px rgba(15,23,42,.20);letter-spacing:.5px}.timer::before{content:"TIME";font-size:9px;letter-spacing:1.2px;opacity:.62;font-weight:800}.timer.low{background:linear-gradient(135deg,#991b1b,#ef4444);box-shadow:0 10px 26px rgba(239,68,68,.28)}
 .timer.low{background:linear-gradient(135deg,#ef4444,#b91c1c);animation:pulse .75s infinite}@keyframes pulse{50%{transform:scale(1.04)}}
 .progress-track{height:9px;background:#e7eaf1;border-radius:20px;overflow:hidden;margin-bottom:19px}.progress-fill{height:100%;width:0;border-radius:20px;background:linear-gradient(90deg,var(--primary),var(--primary2));transition:width .4s ease}
 .question-card{background:rgba(255,255,255,.94);border:1px solid var(--border);border-radius:22px;padding:25px;margin-bottom:18px;box-shadow:0 12px 35px rgba(15,23,42,.07);animation:questionIn .35s ease}
@@ -69,15 +69,15 @@ background:var(--card);border:1px solid rgba(255,255,255,.9);border-radius:22px;
 .result-icon{position:relative;width:84px;height:84px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:39px;color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary2));box-shadow:0 15px 30px rgba(99,91,255,.25)}
 .score-big{position:relative;font-family:var(--serif);font-size:58px;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--primary2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .score-sub{color:var(--muted);margin-top:6px;font-size:15px}.score-remark{margin-top:10px;font-size:17px;font-weight:700}
-.result-stat-grid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:23px 0 0}.result-stat{padding:15px 10px;border-radius:16px;background:#f6f7fb}.result-stat strong{display:block;font-size:22px;font-weight:900}.result-stat span{font-size:13px;color:var(--muted)}
+.result-stat-grid{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:23px 0 0}.result-stat{padding:15px 10px;border-radius:16px;background:#f6f7fb}.result-stat strong{display:block;font-size:22px;font-weight:900}.result-stat span{font-size:13px;color:var(--muted)}
 .review-item{border:1px solid var(--border);border-left-width:5px;border-radius:14px;padding:15px;margin-bottom:11px;background:var(--card);box-shadow:0 5px 18px rgba(15,23,42,.04)}.review-item.ok{border-left-color:var(--ok-line)}.review-item.bad{border-left-color:var(--bad-line)}.review-item .rq{font-size:15px;margin-bottom:8px;font-weight:700}.review-item .ra{font-size:13.5px;color:var(--muted);line-height:1.7}.review-item .ra b{color:var(--text)}
-.action-row{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+.action-row{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.btn-home-color{color:#fff!important;border-color:transparent!important;background:linear-gradient(135deg,#06b6d4,#3b82f6 48%,#8b5cf6);box-shadow:0 10px 25px rgba(59,130,246,.22)}.btn-home-color:hover{box-shadow:0 14px 32px rgba(59,130,246,.30)}
 .toast{position:fixed;top:88px;right:20px;z-index:2000;min-width:280px;max-width:390px;display:flex;align-items:center;gap:12px;padding:14px 17px;border-radius:17px;color:#fff;background:rgba(17,24,39,.95);box-shadow:0 18px 45px rgba(15,23,42,.25);backdrop-filter:blur(16px);opacity:0;visibility:hidden;transform:translateX(35px) scale(.96);transition:.32s cubic-bezier(.2,.8,.2,1)}
 .toast.show{opacity:1;visibility:visible;transform:translateX(0) scale(1)}.toast.success{background:linear-gradient(135deg,#15803d,#16a34a)}.toast.error{background:linear-gradient(135deg,#b91c1c,#ef4444)}.toast.warning{background:linear-gradient(135deg,#b45309,#f59e0b)}.toast.info{background:linear-gradient(135deg,#4338ca,#635bff)}
 .toast-icon{flex:none;width:35px;height:35px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.16);font-weight:900;font-size:17px}.toast-text{flex:1;font-size:14px;line-height:1.45;font-weight:600}
 .footnote{font-size:12.5px;color:var(--muted);margin-top:26px;line-height:1.6}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#080c18;--card:rgba(15,23,42,.90);--text:#f1f5f9;--muted:#94a3b8;--border:#263047}.topbar{background:rgba(8,12,24,.82)}.subject-card,.question-card,.score-card,.back-btn,.nav-row{background:rgba(15,23,42,.90)}.option{background:#111827;border-color:#27324a}.option:hover{background:#172033}.modal{background:#111827}.modal input{background:#0b1020;color:#fff;border-color:#334155}.result-stat{background:#111827}}
-@media(max-width:700px){.topbar-inner{padding:10px 14px}.wrap{width:100%;padding:22px 12px 55px}.brand-text{font-size:15px}.brand-sub{font-size:10px}.brand .seal{width:39px;height:39px}.subject-grid{grid-template-columns:1fr;gap:14px}.subject-card{min-height:135px;padding:19px}.lede{margin:20px 0}.lede h2{font-size:29px}.exam-head .subject-name{font-size:17px}.timer{width:100%;min-width:0}.question-card{padding:19px;border-radius:19px}.qtext{font-size:17px}.nav-row{bottom:6px}.nav-row .btn{flex:1;min-width:0;padding-left:10px;padding-right:10px}.score-big{font-size:50px}.result-stat-grid{grid-template-columns:1fr}.toast{left:12px;right:12px;top:76px;min-width:0;max-width:none}.modal{padding:24px}}
+@media(max-width:700px){.exam-head{top:56px;padding:8px 9px}.timer{min-width:145px;font-size:17px}.topbar-inner{padding:10px 14px}.wrap{width:100%;padding:22px 12px 55px}.brand-text{font-size:15px}.brand-sub{font-size:10px}.brand .seal{width:39px;height:39px}.subject-grid{grid-template-columns:1fr;gap:14px}.subject-card{min-height:135px;padding:19px}.lede{margin:20px 0}.lede h2{font-size:29px}.exam-head .subject-name{font-size:17px}.timer{width:100%;min-width:0}.question-card{padding:19px;border-radius:19px}.qtext{font-size:17px}.nav-row{bottom:6px}.nav-row .btn{flex:1;min-width:0;padding-left:10px;padding-right:10px}.score-big{font-size:50px}.result-stat-grid{grid-template-columns:repeat(2,1fr)}.toast{left:12px;right:12px;top:76px;min-width:0;max-width:none}.modal{padding:24px}}
 
   /* ---------- Fancy Submit Warning Modal ---------- */
   .fancy-modal{
@@ -257,6 +257,7 @@ background:var(--card);border:1px solid rgba(255,255,255,.9);border-radius:22px;
       <div class="result-stat-grid">
         <div class="result-stat"><strong id="statCorrect">০</strong><span>সঠিক উত্তর</span></div>
         <div class="result-stat"><strong id="statWrong">০</strong><span>ভুল উত্তর</span></div>
+        <div class="result-stat"><strong id="statUnanswered">০</strong><span>উত্তরহীন</span></div>
         <div class="result-stat"><strong id="statPercent">০%</strong><span>শতকরা</span></div>
       </div>
     </div>
@@ -264,7 +265,7 @@ background:var(--card);border:1px solid rgba(255,255,255,.9);border-radius:22px;
     <div class="action-row">
       <button class="btn btn-primary" id="btnCopyResult">ফলাফল কপি করো</button>
       <a class="btn" id="btnWhatsapp" href="#" target="_blank" rel="noopener" hidden>WhatsApp-এ পাঠাও</a>
-      <button class="btn btn-ghost" id="btnHome">← হোমে ফিরে যাও</button>
+      <button class="btn btn-home-color" id="btnHome">🏠 হোমে ফিরে যাও</button>
     </div>
 
     <h3 id="reviewTitle" style="margin-bottom:12px; font-size:17px;">উত্তরপত্র পর্যালোচনা</h3>
@@ -643,15 +644,27 @@ function renderPage(){
       b.innerHTML = `<span class="opt-tag">${tags[optIdx]}</span><span>${opt}</span>`;
       b.addEventListener("click", (e)=>{
         e.preventDefault();
-        state.answers[i] = optIdx;
-        
+
+        const previousAnswer = state.answers[i];
         const allOptions = optionsBox.querySelectorAll('.option');
-        allOptions.forEach(opt => opt.classList.remove('selected'));
-        b.classList.add('selected');
+
+        // একই option-এ আবার tap/click করলে unselect হবে
+        if(previousAnswer === optIdx){
+          state.answers[i] = null;
+          b.classList.remove('selected');
         
+        }else{
+          // অন্য option tap করলে সেটি select হবে এবং আগেরটি unselect হবে
+          state.answers[i] = optIdx;
+          allOptions.forEach(opt => opt.classList.remove('selected'));
+          b.classList.add('selected');
+          
+        }
+
         const answeredCount = state.answers.filter(a => a !== null).length;
         $("progressFill").style.width = (answeredCount/total*100)+"%";
-        if(previousAnswer !== optIdx) toast("উত্তরটি সিলেক্ট করা হয়েছে ✓", "success", 1100);
+        const unansweredCount = total - answeredCount;
+        $("pageLabel").textContent = `পাতা ${bnNum(state.currentPage + 1)} / ${bnNum(totalPages)} • উত্তর দেওয়া ${bnNum(answeredCount)}টি • বাকি ${bnNum(unansweredCount)}টি`;
       });
       optionsBox.appendChild(b);
     });
@@ -761,11 +774,14 @@ function showResult(){
   const questions = examData[state.selectedSubject].chapters[state.selectedChapter].exams[state.selectedExam].questions;
   const total = questions.length;
   let correct = 0;
+  let unanswered = 0;
 
   questions.forEach((q,i)=>{
-    if(state.answers[i] === q.answer) correct++;
+    if(state.answers[i] === null) unanswered++;
+    else if(state.answers[i] === q.answer) correct++;
   });
 
+  const wrong = total - correct - unanswered;
   const percent = Math.round(correct / total * 100);
 
   hideAllScreens();
@@ -774,7 +790,8 @@ function showResult(){
   $("scoreBig").textContent = `${bnNum(correct)} / ${bnNum(total)}`;
   $("scoreSub").textContent = `${state.studentName} — ${state.selectedSubject} (${bnNum(percent)}%)`;
   $("statCorrect").textContent = bnNum(correct);
-  $("statWrong").textContent = bnNum(total - correct);
+  $("statWrong").textContent = bnNum(wrong);
+  $("statUnanswered").textContent = bnNum(unanswered);
   $("statPercent").textContent = `${bnNum(percent)}%`;
 
   let remark = "";
@@ -823,12 +840,14 @@ function showResult(){
   }
 
   const resultText =
-`AR Bijoy's Exam Center — ফলাফল
-নাম: ${state.studentName}
+`নাম: ${state.studentName}
 সাবজেক্ট: ${state.selectedSubject}
 অধ্যায়: ${state.selectedChapter}
 পরীক্ষা: ${state.selectedExam}
-স্কোর: ${correct} / ${total} (${percent}%)`;
+স্কোর: ${correct} / ${total} (${percent}%)
+সঠিক: ${correct}
+ভুল: ${wrong}
+উত্তরহীন: ${unanswered}`;
 
   $("btnCopyResult").onclick = ()=>{
     navigator.clipboard.writeText(resultText)

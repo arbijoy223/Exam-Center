@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Created By:AR Bijoy</title>
+<title>Created By: AR Bijoy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -213,17 +213,153 @@
   .review-item .ra b{ color:var(--ink); }
 
   .action-row{ display:flex; gap:10px; flex-wrap:wrap; margin:20px 0; }
+
+  /* ---------- Professional Toast ---------- */
   .toast{
-    position:fixed; bottom: calc(20px + env(safe-area-inset-bottom,0px)); left:50%;
-    transform: translateX(-50%);
-    background:var(--ink); color:var(--paper-card); padding:10px 18px; border-radius:8px;
-    font-size:14px; opacity:0; pointer-events:none; transition:opacity .2s ease;
-    z-index: 20;
+    position:fixed;
+    bottom: calc(22px + env(safe-area-inset-bottom,0px));
+    left:50%;
+    transform: translateX(-50%) translateY(12px);
+    min-width: 260px;
+    max-width: calc(100vw - 32px);
+    background:var(--ink);
+    color:var(--paper-card);
+    padding:12px 16px;
+    border-radius:12px;
+    font-size:14px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .22s ease, transform .22s ease;
+    z-index: 200;
+    box-shadow: 0 10px 30px rgba(0,0,0,.22);
+    border-left:5px solid var(--accent-gold);
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    line-height:1.45;
   }
-  .toast.show{ opacity:1; }
+  .toast.show{
+    opacity:1;
+    transform: translateX(-50%) translateY(0);
+  }
+  .toast.success{ border-left-color: var(--accent-green); }
+  .toast.error{ border-left-color: var(--accent-red); }
+  .toast.warning{ border-left-color: var(--accent-gold); }
+  .toast.info{ border-left-color: var(--accent-blue); }
+
+  .toast-icon{
+    font-size:16px;
+    line-height:1.3;
+    flex-shrink:0;
+  }
+  .toast-text{
+    flex:1;
+  }
 
   .footnote{ font-size:12.5px; color:var(--ink-soft); margin-top:26px; line-height:1.6; }
   [hidden]{ display:none !important; }
+
+  /* ---------- Fancy Submit Warning Modal ---------- */
+  .fancy-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.66);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:9999;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity .25s ease, visibility .25s ease;
+  }
+  .fancy-modal.show{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+  }
+  .fancy-modal-box{
+    width:min(420px,100%);
+    background:var(--paper-card);
+    color:var(--ink);
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:28px 22px 22px;
+    text-align:center;
+    box-shadow:0 30px 80px rgba(0,0,0,.28);
+    transform:translateY(22px) scale(.94);
+    transition:transform .3s cubic-bezier(.2,.8,.2,1);
+  }
+  .fancy-modal.show .fancy-modal-box{
+    transform:translateY(0) scale(1);
+  }
+  .fancy-modal-icon{
+    width:72px;
+    height:72px;
+    margin:0 auto 16px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:34px;
+    background:linear-gradient(135deg,#fff7ed,#fef3c7);
+    box-shadow:0 10px 30px rgba(245,158,11,.18);
+    animation:warningFloat 2s ease-in-out infinite;
+  }
+  @keyframes warningFloat{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-5px)}
+  }
+  .fancy-modal-box h3{
+    font-size:22px;
+    margin-bottom:9px;
+  }
+  .fancy-modal-box p{
+    margin:0 auto 22px;
+    max-width:340px;
+    color:var(--ink-soft);
+    line-height:1.7;
+    font-size:15px;
+  }
+  .fancy-modal-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  .fancy-modal-actions button{
+    border:0;
+    border-radius:14px;
+    padding:13px 15px;
+    font-family:var(--sans);
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .fancy-modal-actions button:hover{
+    transform:translateY(-2px);
+  }
+  .modal-cancel{
+    background:var(--paper);
+    color:var(--ink-soft);
+    border:1px solid var(--line) !important;
+  }
+  .modal-submit{
+    color:#fff;
+    background:linear-gradient(135deg,#635bff,#8b5cf6);
+    box-shadow:0 8px 22px rgba(99,91,255,.25);
+  }
+  .modal-submit:hover{
+    box-shadow:0 12px 30px rgba(99,91,255,.35);
+  }
+  @media(max-width:480px){
+    .fancy-modal-box{padding:25px 17px 17px;border-radius:22px}
+    .fancy-modal-actions{grid-template-columns:1fr}
+  }
+
 </style>
 </head>
 <body>
@@ -304,7 +440,7 @@
       <button class="btn btn-ghost" id="btnHome">← হোমে ফিরে যাও</button>
     </div>
 
-    <h3 style="margin-bottom:12px; font-size:17px;">উত্তরপত্র পর্যালোচনা</h3>
+    <h3 id="reviewTitle" style="margin-bottom:12px; font-size:17px;">উত্তরপত্র পর্যালোচনা</h3>
     <div id="reviewBox"></div>
   </section>
 
@@ -319,6 +455,20 @@
     <div class="modal-buttons">
       <button class="btn btn-ghost" id="btnCancelName">বাতিল</button>
       <button class="btn btn-primary" id="btnStartExam">পরীক্ষা শুরু করো</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Fancy Submit Warning Modal -->
+<div class="fancy-modal" id="submitWarningModal" aria-hidden="true">
+  <div class="fancy-modal-box" role="dialog" aria-modal="true" aria-labelledby="submitWarningTitle">
+    <div class="fancy-modal-icon">⚠️</div>
+    <h3 id="submitWarningTitle">পরীক্ষা জমা দিতে চাও?</h3>
+    <p id="submitWarningText">কিছু প্রশ্নের উত্তর দেওয়া হয়নি।</p>
+    <div class="fancy-modal-actions">
+      <button class="modal-cancel" id="btnCancelSubmit">← ফিরে যাই</button>
+      <button class="modal-submit" id="btnConfirmSubmit">✓ তবুও জমা দিই</button>
     </div>
   </div>
 </div>
@@ -362,7 +512,6 @@ const examData = {
       },
       "অধ্যায় ২: সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস": {
         exams: {
-          
           "পরীক্ষা ১": {
             examTime: 10,
             questions: [
@@ -378,464 +527,69 @@ const examData = {
               { q: "দশমিক সংখ্যা 15 এর হেক্সাডেসিমেল মান কত?", options: ["E","F","10","D"], answer: 1 }
             ]
           },
-            "পরীক্ষা ২": {
-            examTime: 20,
-            questions: [
-            
-        {
-            q: "সংখ্যা পদ্ধতি কী?",
-            options: [
-                "সংখ্যা প্রকাশের একটি পদ্ধতি",
-                "তথ্য সংরক্ষণের একটি পদ্ধতি",
-                "কম্পিউটার তৈরির একটি পদ্ধতি",
-                "যোগাযোগের একটি পদ্ধতি"
-            ],
-            answer: 0
-        },
-
-        {
-            q: "সংখ্যা পদ্ধতি প্রধানত কত প্রকার?",
-            options: [
-                "২ প্রকার",
-                "৩ প্রকার",
-                "৪ প্রকার",
-                "৫ প্রকার"
-            ],
-            answer: 2
-        },
-
-        {
-            q: "নিচের কোনটি প্রচলিত সংখ্যা পদ্ধতি?",
-            options: [
-                "দশমিক",
-                "বাইনারি",
-                "অক্টাল",
-                "উপরের সবগুলো"
-            ],
-            answer: 3
-        },
-
-        {
-            q: "দশমিক সংখ্যা পদ্ধতির ভিত্তি কত?",
-            options: [
-                "২",
-                "৮",
-                "১০",
-                "১৬"
-            ],
-            answer: 2
-        },
-
-        {
-            q: "বাইনারি সংখ্যা পদ্ধতির ভিত্তি কত?",
-            options: [
-                "২",
-                "৮",
-                "১০",
-                "১৬"
-            ],
-            answer: 0
-        },
-
-        {
-            q: "অক্টাল সংখ্যা পদ্ধতির ভিত্তি কত?",
-            options: [
-                "২",
-                "৮",
-                "১০",
-                "১৬"
-            ],
-            answer: 1
-        },
-
-        {
-            q: "হেক্সাডেসিমেল সংখ্যা পদ্ধতির ভিত্তি কত?",
-            options: [
-                "৮",
-                "১০",
-                "১২",
-                "১৬"
-            ],
-            answer: 3
-        },
-
-        {
-            q: "বাইনারি সংখ্যা পদ্ধতিতে মোট কতটি অঙ্ক ব্যবহৃত হয়?",
-            options: [
-                "২টি",
-                "৪টি",
-                "৮টি",
-                "১০টি"
-            ],
-            answer: 0
-        },
-
-        {
-            q: "বাইনারি সংখ্যা পদ্ধতিতে ব্যবহৃত অঙ্ক দুটি কোনটি?",
-            options: [
-                "১ ও ২",
-                "০ ও ১",
-                "০ ও ২",
-                "১ ও ৯"
-            ],
-            answer: 1
-        },
-
-        {
-            q: "অক্টাল সংখ্যা পদ্ধতিতে কোন অঙ্কগুলো ব্যবহৃত হয়?",
-            options: [
-                "০ থেকে ৭",
-                "১ থেকে ৮",
-                "০ থেকে ৮",
-                "০ থেকে ৯"
-            ],
-            answer: 0
-        },
-
-        {
-            q: "হেক্সাডেসিমেল সংখ্যা পদ্ধতিতে মোট কতটি প্রতীক ব্যবহৃত হয়?",
-            options: [
-                "৮টি",
-                "১০টি",
-                "১২টি",
-                "১৬টি"
-            ],
-            answer: 3
-        },
-
-        {
-            q: "হেক্সাডেসিমেল সংখ্যা পদ্ধতিতে ১০ থেকে ১৫ প্রকাশ করতে কোন বর্ণগুলো ব্যবহৃত হয়?",
-            options: [
-                "A থেকে F",
-                "A থেকে E",
-                "B থেকে G",
-                "X থেকে Z"
-            ],
-            answer: 0
-        },
-
-        {
-            q: "কম্পিউটার সাধারণত কোন সংখ্যা পদ্ধতি ব্যবহার করে?",
-            options: [
-                "দশমিক",
-                "অক্টাল",
-                "বাইনারি",
-                "হেক্সাডেসিমেল"
-            ],
-            answer: 2
-        },
-
-        {
-            q: "যে সংখ্যা পদ্ধতিতে অঙ্কের অবস্থান পরিবর্তনের সঙ্গে মান পরিবর্তিত হয় তাকে কী বলে?",
-            options: [
-                "অস্থানিক সংখ্যা পদ্ধতি",
-                "স্থানিক সংখ্যা পদ্ধতি",
-                "বাইনারি সংখ্যা পদ্ধতি",
-                "অক্টাল সংখ্যা পদ্ধতি"
-            ],
-            answer: 1
-        },
-
-        {
-            q: "দশমিক সংখ্যা পদ্ধতি কোন ধরনের সংখ্যা পদ্ধতি?",
-            options: [
-                "অস্থানিক",
-                "স্থানিক",
-                "প্রতীকভিত্তিক",
-                "বর্ণভিত্তিক"
-            ],
-            answer: 1
-        },
-
-        {
-            q: "বাইনারি সংখ্যা পদ্ধতি কোন ধরনের সংখ্যা পদ্ধতি?",
-            options: [
-                "অস্থানিক",
-                "স্থানিক",
-                "বর্ণভিত্তিক",
-                "অক্ষরভিত্তিক"
-            ],
-            answer: 1
-        },
-
-        {
-            q: "অস্থানিক সংখ্যা পদ্ধতিতে কোনো প্রতীকের মান কিসের ওপর নির্ভর করে না?",
-            options: [
-                "প্রতীকের রঙের ওপর",
-                "প্রতীকের অবস্থানের ওপর",
-                "প্রতীকের আকারের ওপর",
-                "প্রতীকের সংখ্যার ওপর"
-            ],
-            answer: 1
-        },
-
-        {
-            q: "সংখ্যা পদ্ধতির ভিত্তিকে কী বলা হয়?",
-            options: [
-                "Digit",
-                "Radix",
-                "Bit",
-                "Byte"
-            ],
-            answer: 1
-        },
-
-        {
-            q: "একটি সংখ্যা পদ্ধতিতে ব্যবহৃত মোট আলাদা অঙ্ক বা প্রতীকের সংখ্যাকে কী নির্দেশ করে?",
-            options: [
-                "ভিত্তি বা Radix",
-                "Bit",
-                "Byte",
-                "Position"
-            ],
-            answer: 0
-        },
-
-        {
-            q: "নিচের কোনটি একটি অস্থানিক সংখ্যা পদ্ধতির উদাহরণ?",
-            options: [
-                "দশমিক",
-                "বাইনারি",
-                "রোমান",
-                "অক্টাল"
-            ],
-            answer: 2
-        }
-            ]
-          }
-          
-        }
-      }
-    },
-  },
-  "গণিত": {
-    chapters: {
-      "অধ্যায় ১: বীজগণিত": {
-        exams: {
-          "পরীক্ষা ১": {
-            examTime: 15,
-            questions: [
-              { q: "২৫ এর বর্গমূল কত?", options: ["৪","৫","৬","৭"], answer: 1 },
-              { q: "৯ এর বর্গ কত?", options: ["৭২","৮১","৯০","৯৯"], answer: 1 },
-              { q: "২ + ২ × ২ = কত?", options: ["৬","৮","৪","১০"], answer: 0 },
-              { q: "১০০ এর ২০% কত?", options: ["১০","২০","৩০","৪০"], answer: 1 },
-              { q: "৭ × ৮ = কত?", options: ["৫৪","৫৬","৫৮","৬৪"], answer: 1 }
-            ]
-          }
-        }
-      },
-      "অধ্যায় ২: জ্যামিতি": {
-        exams: {
-          "পরীক্ষা ১": {
-            questions: [
-              { q: "১২ এবং ১৮ এর গ.সা.গু কত?", options: ["২","৩","৬","৯"], answer: 2 },
-              { q: "একটি ত্রিভুজের কোণ তিনটির সমষ্টি কত ডিগ্রি?", options: ["৯০°","১৮০°","২৭০°","৩৬০°"], answer: 1 },
-              { q: "একটি বৃত্তের পরিধি নির্ণয়ের সূত্র কোনটি?", options: ["πr","2πr","πr²","2πr²"], answer: 1 },
-              { q: "একটি আয়তক্ষেত্রের ক্ষেত্রফল = ?", options: ["দৈর্ঘ্য + প্রস্থ","দৈর্ঘ্য × প্রস্থ","২(দৈর্ঘ্য + প্রস্থ)","দৈর্ঘ্য ÷ প্রস্থ"], answer: 1 }
-            ]
-          }
+         
         }
       }
     }
   },
-  "রসায়ন - পরিমাণগত রসায়ন": {
-  chapters: {
-    "অধ্যায় ১: পরিমাণগত রসায়ন": {
-      exams: {
-        "পরীক্ষা ১ (প্রশ্ন ১-১০)": {
-          examTime: 15,
-          questions: [
-            { q: "নিচের কোনটিতে বেশি পরমাণু আছে?", options: ["1.10 g of hydrogen atoms","14.7 g of chromium atoms","2.0 g of helium atoms","7.0 g of nitrogen atoms"], answer: 0 },
-            { q: "প্রমাণ তাপমাত্রা ও চাপে (STP) কোন গ্যাসের 1.0 গ্রাম সবচেয়ে বেশি আয়তন দখল করবে?", options: ["N₂","H₂","O₂","Ar"], answer: 1 },
-            { q: "প্রমাণ অবস্থায় 10.0 L নিচের গ্যাসে অণুর সংখ্যা কত?", options: ["2.689 × 10²³","26.89 × 10²³","0.2689 × 10²³","26.89 × 10²⁵"], answer: 0 },
-            { q: "STP তে 2240 mL CO₂ গ্যাসের ওজন কত?", options: ["4.0 g","4.4 g","8.8 g","8.0 g"], answer: 1 },
-            { q: "18 g গ্লুকোজ কতগুলো কার্বন অণু থাকবে?", options: ["6.0 × 10²³","6.0 × 10²²","3.6 × 10²³","3.6 × 10²⁴"], answer: 2 },
-            { q: "7.1 g ক্লোরিনে মধ্যে কত মোল Cl₂ থাকবে?", options: ["0.1 mol","1.0 mol","0.2 mol","0.4 mol"], answer: 0 },
-            { q: "1.8 g পানিতে কতগুলো পানির অণু থাকবে?", options: ["60.23 × 10²³","0.6023 × 10²²","6.023 × 10²²","6.036 × 10²³"], answer: 2 },
-            { q: "24.5 g H₂SO₄ এ কত মোল বিদ্যমান?", options: ["2.5 mol","0.25 mol","0.025 mol","25 mol"], answer: 2 },
-            { q: "0.1g H₂ গ্যাসে কতটি অণু আছে?", options: ["6.023 × 10²³","6.023 × 10²²","3.023 × 10²²","3.023 × 10²³"], answer: 1 },
-            { q: "1000 mL 0.1 M Na₂S₂O₃ এ Na⁺ এর পরিমাণ কত?", options: ["2.3 g","0.16 g","0.23 g","4.6 g"], answer: 2 }
-          ]
-        },
-        "পরীক্ষা ২ (প্রশ্ন ১১-২০)": {
-          examTime: 15,
-          questions: [
-            { q: "0.01 M 600 mL এ C₆H₁₂O₆ কত গ্রাম থাকে?", options: ["1.08 g","10.8 g","0.108 g","1.8 g"], answer: 0 },
-            { q: "কোন যৌগে C = 18.5%, H = 1.55%, Cl = 55.04%, O = 23.81% উপস্থিত আছে। যৌগটির সংকেত কী হতে পারে?", options: ["CHClO","ClCH₂O","CH₂ClO","C₂H₂OCl"], answer: 0 },
-            { q: "বায়ুতে ব্যবহৃত একটি সারে 30% ফসফরাস P₄O₅ হিসেবে থাকে, যা পানিতে দ্রবণীয়। উক্ত সারে ফসফরাসের পরিমাণ কত?", options: ["6.55%","13.1%","26.2%","30.0%"], answer: 1 },
-            { q: "হাইড্রোজেনের পারমাণবিক ভর 1 গ্রাম এ কয়টি অর্ধ কণা?", options: ["একটি হাইড্রোজেন পরমাণুর ভর এক গ্রাম","দুটি হাইড্রোজেন পরমাণুর ভর এক গ্রাম","6.023×10²³ সংখ্যক হাইড্রোজেন পরমাণুর ভর এক গ্রাম","6.023×10²³ সংখ্যক হাইড্রোজেন অণুর ভর এক গ্রাম"], answer: 2 },
-            { q: "10 g CaCO₃ থেকে 2 × 10²⁰ টি অণু সরিয়ে নিলে কতটুকু CaCO₃ অবশিষ্ট থাকবে?", options: ["9.550 g","9.966 g","9.881 g","9.662 g"], answer: 2 },
-            { q: "5 g CO₂ গ্যাসে কতটি অণু থাকে?", options: ["6.84 × 10²²","6.0 × 10²²","6.68 × 10¹⁸","5.84 × 10²²"], answer: 0 },
-            { q: "পানিতে H₂ এর শতকরা ভর-", options: ["50.0","33.0","10.5","11.1"], answer: 3 },
-            { q: "1.032 g O₂ এবং 0.573 g CO₂ এর মিশ্রণ CO₂ এর মোল ভগ্নাংশ কত?", options: ["0.1677","0.287","0.713","0.8323"], answer: 2 },
-            { q: "STP তে এক মোল SO₂ গ্যাসের আয়তন কত?", options: ["22.40 L","24.78 L","2400.00 L","223.00 L"], answer: 1 },
-            { q: "10% Na₂CO₃দ্রবণ কত মোল দ্রব আছে?", options: ["0.2","0.09","0.11","0.08"], answer: 1 }
-          ]
-        },
-        "পরীক্ষা ৩ (প্রশ্ন ২১-৩০)": {
-          examTime: 15,
-          questions: [
-            { q: "16 g অক্সিজেন গ্যাসে কয়টি অক্সিজেন অণু থাকে?", options: ["3.011 × 10²³টি","3.011 × 10²²টি","2.03 × 10²³টি","2.032 × 10²³টি"], answer: 0 },
-            { q: "এক mol CH₃OH এ কতটি পরমাণু থাকে?", options: ["12.0 × 10²³","6","6.0 × 10","3.6 × 10²⁴"], answer: 3 },
-            { q: "20% H₂SO₄ দ্রবণে পানির শতকরা পরিমাণ কত?", options: ["20 g","80 g","100 g","120 g"], answer: 1 },
-            { q: "32 g অক্সিজেনে অণুর সংখ্যা-", options: ["6.844 × 10²²","2 × 10⁵","6.023 × 10²³","2.99 × 10²³"], answer: 2 },
-            { q: "0.44 g CO₂ গ্যাসে কত মোল CO₂ থাকে?", options: ["0.1 mol","0.001 mol","0.001 mol","0.01 mol"], answer: 3 },
-            { q: "ফ্লুটিন-এ 40% কার্বন এবং 6.67% হাইড্রোজেন আছে বিধায় নিচের কোনটি ভুল?", options: ["ফ্লুটিন-এ অক্সিজেনের পরিমাণ- 53.33%","কার্বন পরমাণু এর আপেক্ষিক নগদ- 3.33%","হাইড্রোজেন পরমাণু এর আপেক্ষিক নগদ- 6.67","অক্সিজেন পরমাণু এর আপেক্ষিক নগদ- 53.33"], answer: 2 },
-            { q: "নিচের কোনটি সঠিক নয়?", options: ["CO₂ এর একটি অণুর ভর হলো 7.3065426 × 10⁻²³g","1 টি সোডিয়াম পরমাণুর ভর = 3.82 × 10⁻²³g","1g হাইড্রোজেনে 6.022 × 10²³ টি হাইড্রোজেন পরমাণু আছে","16g অক্সিজেনে অণুর সংখ্যা = 3.011 × 10²³ g"], answer: 2 },
-            { q: "Na, C এবং O এর পারমাণবিক ভর যথাক্রমে 23, 12 ও 16 হলে, Na₂CO₃ সম্পর্কে নিচের কোনটি সঠিক নয়?", options: ["কার্বনের শতকরা পরিমাণ = 11.3%","Na₂CO₃ এর আপেক্ষিক ভর = 106","সোডিয়ামের শতকরা পরিমাণ = 43.3%","অক্সিজেনের শতকরা পরিমাণ = 55.3%"], answer: 2 },
-            { q: "আয়তোগ্যাজ্ঞো সংখ্যার মান নিচের কোনটি?", options: ["6.02 × 10⁻²³","1.66 × 10⁻²⁴","6.02 × 10²³","22.4"], answer: 2 },
-            { q: "নিচের কোনটি হাইড্রোজেনের একটি পরমাণুর ভর (g)?", options: ["1.67 × 10⁻²⁴","1.67 × 10⁻²⁴","1.67 × 10⁻²⁵","1.67 × 10⁻²³"], answer: 0 }
-          ]
-        }
-      }
-    }
-  }
-},
-  "রসায়ন - জারণ-বিজারণ ও ইলেকট্রোকেমিস্ট্রি": {
-  chapters: {
-    "অধ্যায় ১: জারণ-বিজারণ": {
-      exams: {
-        "পরীক্ষা ১ (প্রশ্ন ৩৯২-৪২১)": {
-          examTime: 45,
-          questions: [
-            { q: "নিচের সমতারুক্ত বিক্রিয়ার সহগাংকের মান হলো- aNH₃ + bO₂ → cNO + dH₂O", options: ["a = 2, b = 3, c = 2, and d = 3","a = 4, b = 7, c = 4, and d = 4","a = 4, b = 5, c = 4, and d = 6","a = 6, b = 7, c = 6, and d = 9"], answer: 3 },
-            { q: "কোন বিক্রিয়াটি জারণ-বিজারণ নয়?", options: ["2H₂O₂ → 2H₂O + O₂","CO₂ + C → 2CO","CaCO₃ → CaO + CO₂","Fe₂O₃ + 3CO → 2Fe + 3CO₂"], answer: 2 },
-            { q: "নিচের কোন বিক্রিয়াটি ভিন্নানুপাতিক বিক্রিয়া?", options: ["H₂S + Cl₂ → 2HCl + S","CuSO₄ + NH₄OH → Cu(OH)₂ + (NH₄)₂ SO₄","Fe + dil. H₂SO₄ → FeSO₄ + H₂","Cl₂ + NaOH → NaClO + NaCl + H₂O"], answer: 3 },
-            { q: "নিচের বিক্রিয়াটি পূরণ কর- 6Fe²⁺ + Cr₂O₇²⁻ + 14H⁺ → 6Fe³⁺ + ..... + 7H₂O", options: ["Cr³⁺","Cr⁶⁺","2Cr³⁺","Cr(OH)₃"], answer: 2 },
-            { q: "নিচের বিক্রিয়া আংশিকা কোন কার্বন আইসোটোপ্রোটিক করণে উৎপন্ন হয়- 2NH₃(g) + 3CuO(s) → N₂(g) + 3Cu(s) + 3H₂O(g)", options: ["Catalyst","Reducing agent","Oxidizing agent","Substituting agent"], answer: 1 },
-            { q: "C₂H₅OH + 3O₂ → 2CO₂ + 3H₂O বিক্রিয়া সংঘটন করতে নিচের কোন উৎপন্ন ভূমিকা রাখে না?", options: ["C-এর জারণ সংখ্যা_হ্রাস পায়","H-এর জারণ সংখ্যা অপরিবর্তিত থাকে","O-এর জারণ সংখ্যা_হ্রাস পায়","বিক্রিয়ায় O₂ বিজারিত হয়"], answer: 0 },
-            { q: "নিচের কোন বিক্রিয়াটি অসমাংশকরণ বিক্রিয়া?", options: ["2Na + Cl₂ → 2NaCl","AgNO₃ + NaCl → NaNO₃ + AgCl","Cl₂ + H₂O → HCl + HOCl","FeCl₃ + SnCl₂ → SnCl₄ + FeCl₂"], answer: 2 },
-            { q: "নিচের কোন বিক্রিয়াটিতে জারণ-বিজারণ বিক্রিয়া হয়েছে গন্য করা যায়?", options: ["Cu²⁺ + 4NH₃ → [Cu(NH₃)₄]²⁺","Cl₂ + 2OH⁻ → Cl⁻ + ClO⁻ + H₂O","NH₃ + H⁺ → NH₄⁺","Ca²⁺ + 2F⁻ → CaF₂"], answer: 1 },
-            { q: "নিচের কোন বিক্রিয়াটিতে জারণ-বিজারণ বিক্রিয়া ছাড়া অন্যান্য বিক্রিয়া?", options: ["Cr₂O₇²⁻ + 2OH⁻ → 2CrO₄²⁻ + H₂O","H₂O₂ + KOH → KHO₂ + H₂O","K + O₂ → KO₂","Ca(HCO₃)₂ → CaCO₃ + CO₂ + H₂O"], answer: 3 },
-            { q: "0.5 g FeSO₄ কে জারিত করতে কত g K₂Cr₂O₇ দরকার হবে?", options: ["0.97","3.80","5.45","1.94"], answer: 3 },
-            { q: "9.5 g FeSO₄ কে জারিত করতে 1 M KMnO₄ দরকার হবে?", options: ["12.5 mL","11.2 mL","10.6 mL","7.5 mL"], answer: 0 },
-            { q: "নিচের কোন বিক্রিয়া 'oxidation-reduction reaction'?", options: ["CaCO₃ → CaO + CO₂","NaCl + AgNO₃ → NaNO₃ +AgCl","HF + KOH → KF + H₂O","2H₂S + SO₂ → 2H₂O + 3S"], answer: 3 },
-            { q: "নিচের কোন বিক্রিয়া তড়িৎ ক্ষমাজনক মূলক অপসারিত হয়েছে?", options: ["Cu(s) + C(s) → Cu(s) + CO(g)","Cl₂(g) + 2Na(s) → 2NaCl(g)","CuSO₄(aq) + Zn(s) → Cu(g) + ZnSO₄(aq)","2FeCl₃(aq) + SnCl₂(aq) → 2FeCl₂(aq) + SnCl₄"], answer: 1 },
-            { q: "নিচের কোন বিক্রিয়া জারণ-বিজারণ বিক্রিয়া?", options: ["Ca + 2F → CaF₂","Cu²⁺ + 4NH₃ → [Cu(NH₃)₄]²⁺","Ca²⁺ + 2F⁻ → CaF₂","NH₃ + H⁺ → NH₄⁺"], answer: 0 },
-            { q: "2MnO₄⁻ + 16H⁺ + ne⁻ → 2Mn²⁺ + 8H₂O বিক্রিয়ায়- (i) Mn এর জারণ সংখ্যা +7 হতে +2 হয় (ii) Mn²⁺ দুটি ইলেকট্রন গ্রহণ করে (iii) n এর মান 10 নিচের কোনটি সঠিক?", options: ["i ও ii","ii ও iii","i ও iii","i, ii ও iii"], answer: 2 },
-            { q: "HgCl₂(s) + Hg(l) → Hg₂Cl₂(s)", options: ["HgCl₂(aq) → Hg(l) + Cl₂(aq)","2Na + Cl → 2NaCl(s)","4HCl(aq) + MnO₂(s) → MnCl₂ + Cl₂(g) + 2H₂O(l)","Zn(s) + H₂SO₄(aq) → ZnSO₄(aq) + H₂(g)"], answer: 2 },
-            { q: "Sn²⁺ আয়নের 1 mol থাকা K₂Cr₂O₇ এর কত mol বিজারিত হবে?", options: ["1/3","3","1/6","6"], answer: 0 },
-            { q: "বিভিন্ন বিক্রিয়ার কোনটি?", options: ["CaCO₃ → CaO + CO₂","H₂ + O₂ → H₂O","NaOH + HCl → NaCl + H₂O","কোনটিই নয়"], answer: 3 },
-            { q: "অম্লীয় দ্রবণে 6 g FeSO₄ কে জারিত করতে কত g K₂Cr₂O₇ প্রয়োজন হবে?", options: ["0.97","3.80","5.45","1.94"], answer: 3 },
-            { q: "20 mL অম্লীয় ফেরাস দ্রবণের চাইট্রেশনে 18 mL 100 mM KMnO₄ প্রয়োজন হয়। ফেরাস দ্রবণের দ্রবণীয় ঘনমাত্রা কত?", options: ["0.45","0.5","1.0","4.5"], answer: 0 },
-            { q: "আয়রনডাইঅক্সাইড চাইট্রেশনে 1, ছাড়া S₂O₃²⁻ জারিত হলো পরিবর্তন হয়-", options: ["SO₃²⁻","SO₂","SO₄²⁻","S₂O₆²⁻"], answer: 3 },
-            { q: "অম্লীয় দ্রবণ KMnO₄ কবজি ইলেকট্রন গ্রহণ করে?", options: ["3Ti","4Ti","5Ti","6Ti"], answer: 2 },
-            { q: "নিচের কোন জারণ-বিজারণ বিক্রিয়া নয়?", options: ["4LiNO₃ → 2Li₂O + 4NO₂ + O₂","Li₂CO₃ → Li₂O + CO₂","Na₂SO₃ + 2HCl → 2NaCl + SO₂ + H₂O","2NaHCO₃ → Na₂CO₃ + CO₂ + H₂O"], answer: 3 },
-            { q: "H₂SO₄ + K₂Cr₂O₇ + KI এর বিক্রিয়ায় প্রধান উপাদান হলো-", options: ["K-SO₄","Cr₂(SO₄)₃","I₂","Cr₂O₃"], answer: 2 },
-            { q: "5 g FeSO₄ কে সম্পূর্ণ জারিত করতে কত গ্রাম K₂Cr₂O₇ প্রয়োজন?", options: ["1.314 g","1.614 g","1.514 g","1.416 g"], answer: 1 },
-            { q: "500 g Fe₂O₃ তে O থাকা বিজারিত করলে কতটুকু Fe পাওয়া যাবে?", options: ["3500 g","350 g","35 g","7000 g"], answer: 1 },
-            { q: "25 cm³ 0.1 M NaCl এর দ্রবণ থেকে সম্পূর্ণরূপে কোনটি বানানো কত mL 0.1 M KMnO₄ এর কত আয়তন প্রয়োজন হবে?", options: ["2.5 cm³","3.0 cm³","4.0 cm³","5.0 cm³"], answer: 2 },
-            { q: "25g Na₂S₂O₃.5H₂O পানিতে দ্রবীভূত করে 1.0L দ্রবণ তৈরি হলে দ্রবণের ঘনমাত্রা কত mL?", options: ["1.04","2.04","4.02","4.01"], answer: 0 },
-            { q: "Sn²⁺ আয়নের 1 mol থাকা K₂Cr₂O₇ এর কত mol বিজারিত হবে?", options: ["1/3","3","1/6","6"], answer: 0 },
-            { q: "নিচের কোন বিক্রিয়া অসমানুপাতিক বিক্রিয়া বিজারণ বিক্রিয়া?", options: ["2NH₃(g) + 3CuO(s) → N₂(g) + 3Cu(s) + 3H₂O(g)","Ca + 2F → CaF₂","বিভাজন","প্রতিস্থাপক"], answer: 0 }
-          ]
-        },
-        "পরীক্ষা ২ (প্রশ্ন ৩৯৮-৪২৭)": {
-          examTime: 45,
-          questions: [
-            { q: "নিচের বিক্রিয়ায়কে কী বলা হয়? 3 ClO⁻ (aq) + 2Cr(aq) + ClO₃⁻ (aq)", options: ["প্রতিস্থাপন","জারণ-বিজারণ","বিভাজন","অসমানুপাতিক"], answer: 3 },
-            { q: "নিচের সমীকরণটির মধ্যে কোনটি জারণ বিজারক বিক্রিয়া?", options: ["Cr₂O₇²⁻ + 2OH⁻ → 2CrO₄²⁻ + H₂O","H₂O₂ + KOH → KHO₂ + H₂O","K + O₂ → KO₂","Ca(HCO₃)₂ → CaCO₃ + CO₂ + H₂O"], answer: 2 },
-            { q: "K + O₂ → KO₂ বিক্রিয়ার সমতা K + O₂ → K O₂ O এর জারণ সংখ্যা −1 এবং C এর জারণ সংখ্যা + 2 এর সাথে +1 সমান (বিজারণ) এবং 2 নং এ কেন্দ্রে (জারক) এবং অক্সিজেন ⁰ → বিজারণ ⁰", options: ["বিজারণ","জারক","বিজারণ","(বিজারণ)"], answer: 1 },
-            { q: "2KNO₃ → 2KNO₂ + O₂ বিক্রিয়াটিতে কৌশলী জারিত ও বিজারিত বোঝা যায়- যা্থা্ক্রমে N এবং O2", options: ["nitrogen and oxygen","oxygen and nitrogen","potassium and oxygen","nitrogen and potassium"], answer: 2 },
-            { q: "MnO₄⁻ + 8H⁺ + 5Fe²⁺ → Mn²⁺ + 4H₂O + 5Fe³⁺ বিক্রিয়াটিতে কোনটি জারক?", options: ["MnO₄⁻","H⁺","Fe²⁺","Mn⁴⁺"], answer: 0 },
-            { q: "(NH₄)₃ [Fe(CN)₆] বোঝে আয়রনের জারণ অবস্থা কত?", options: ["+ 5","+ 4","+ 3","+ 2"], answer: 2 },
-            { q: "S₂O₃²⁻ মূলকে সালফারের এর জারণ মান কত?", options: ["2","2.5","3","3.5"], answer: 1 },
-            { q: "Ca(OCl)Cl জারক বোঝে Ca এর জারণ সংখ্যা কত?", options: ["− 1","+ 1","− 2","+ 2"], answer: 3 },
-            { q: "N এর সর্বোচ্চ জারণ সংখ্যা [N₂O₅] এ S-এর জারণ সংখ্যা কত্রে নিচের কোনটিতে?", options: ["N₂O₃","NO₂","[NH₄]⁺","[NO₂]⁻"], answer: 1 },
-            { q: "কোন যৌগে কার্বনের সর্বোচ্চ জারণ অবস্থা +3 জারণ সংখ্যা আছে?", options: ["ClO₂⁻","PO₄³⁻","S₂O₃²⁻","NO₂⁻"], answer: 0 },
-            { q: "IO₃⁻ + 5I⁻ + 6H⁺ → 3I₂ + 3H₂O বিক্রিয়াটিতে কোনটি?", options: ["IO₃⁻","H⁺","IO₃⁻ ও I⁻"], answer: 2 },
-            { q: "Na₂S₂O₆ যৌগে S এর জারণ সংখ্যা কত?", options: ["1.5","3.5","2.5","4.5"], answer: 2 },
-            { q: "S₂O₃²⁻ মূলকে সালফারের এর জারণ মান কত?", options: ["2","2.5","3","3.5"], answer: 1 },
-            { q: "নিচের কোনটি সঠিক বিজারক উভয়ই?", options: ["+ 1","+ 3","+ 5","+ 7"], answer: 1 },
-            { q: "Br₂ + NaOH (conc) → BrO₃⁻ + Na⁺ + H₂O এখানে Br এর জারণ সংখ্যার পরিবর্তন হয়-", options: ["0 থেকে 5","0 থেকে − 3","+ 1 থেকে + 5","− 1 থেকে 5"], answer: 0 },
-            { q: "[Co(NH₃)₆]³⁺ আয়ানটিতে কোবাল্ট পরমাণুর জারণ মান কত?", options: ["+ 15","+ 3","+ 5","+ 9"], answer: 1 },
-            { q: "[Fe(CN)₆]³⁻ আয়নে Fe এর জারণ সংখ্যা কত?", options: ["+ 1","+ 3","+ 2","+ 4"], answer: 1 },
-            { q: "[Cu(NH₃)₄]²⁺ আয়নে Cu এর জারণ সংখ্যা কত?", options: ["+ 2","+ 4","+ 6","+ 8"], answer: 0 },
-            { q: "S₂O₃²⁻ আয়নে O এর জারণ সংখ্যা কত?", options: ["− 4","− 6","− 8","− 10"], answer: 1 },
-            { q: "KMnO₄ যৌগে Mn এর জারণ সংখ্যা কত?", options: ["+ 4","+ 5","+ 6","+ 7"], answer: 3 },
-            { q: "Br₂ + NaOH (conc) → BrO₃⁻ + Na⁺ + H₂O এখানে Br এর জারণ সংখ্যা হয়ে-", options: ["0 থেকে 5","0 থেকে − 3","+ 1 থেকে + 5","− 1 থেকে 5"], answer: 0 },
-            { q: "K₂MnO₄ নিচের সমীকরণের অনুরুপী অক্সিজেন বর্ণনার জন্য কত mL 0.1 M KMnO₄ বিক্রিয়া করবে- 3MnO₄²⁻ + 5C₂O₄²⁻ + 16H⁺ → 2Mn²⁺ + 10CO₂ + 8H₂O", options: ["20 mL 0.5 M H₂C₂O₄ এর সাথে","50 mL 0.1 M H₂C₂O₄ এর সাথে","50 mL 0.5 M H₂C₂O₄ এর সাথে","20 mL 0.1 M H₂C₂O₄ এর সাথে"], answer: 1 },
-            { q: "25g Na₂S₂O₃.5H₂O পানিতে দ্রবীভূত করে 1.0L দ্রবণ তৈরি হলে দ্রবণের ঘনমাত্রা কত ক্ষার 10.0 mL 0.02 molL⁻¹ K₂Cr₂O₇ এর সাথে 10.0 mL ঘন H₂SO₄ ও 1.0g NaHCO₃ এর উপস্থিতিতে 10.0 mL 10% KI দ্রবণের বিক্রিয়ায় উৎপন্ন I₂ কে চাইট্রেশনে কার জন্য এবং দ্রবণের 13.0 mL প্রয়োজন হয়। Na₂S₂O₃.5H₂O দ্রবণের ঘনমাত্রা কোনটি?", options: ["0.0462","0.0923","0.0231","0.0115"], answer: 2 },
-            { q: "3.50g অনার্দ্র ও বিশুদ্ধ FeSO₄ কে স সম্পূর্ণ জারিত করতে কত গ্রাম K₂CrO₇ লাগবে?", options: ["6.7764 g","3.3882 g","2.2580 g","1.1294 g"], answer: 3 },
-            { q: "20 cm³ আয়তনের প্রদত্ত মোল দ্রবণকে চাইট্রেশনে করতে 0.1 M 10 cm³ আয়তনের KMnO₄ প্রয়োজন হয়। ঐ দ্রবণে আয়তনের পরিমাণ কত?", options: ["0.558 g","2.790 g","0.00558 g","0.279 g"], answer: 3 },
-            { q: "45 mL আয়তনের হাইড্রোজেন পার অতিবস্তুতে জারিত করতে কত প্রাস সালফিউরিক এসিড আয়তন যুক্ত করে 27 mL আয়তনের 0.3 M KMnO₄ দ্রবণ প্রয়োজন হয়। ঐ নমুনার H₂O₂ এর মোলারিত কত?", options: ["0.40 M","0.50 M","0.48 M","0.45 M"], answer: 2 },
-            { q: "এক টুকরো চিনি আয়রন দ্রব 6% (w/w) চিনির অ্যামোনিয়া দ্রবণ প্রয়োগ করতে 0.02 M KMnO₄ দ্রবণের 98.35 cm³ লাগো। লোহার নমুনার কত শতাংশ?", options: ["0.5496 g","0.0549 g","11.1603 g","11.5684 g"], answer: 0 },
-            { q: "20 mL আয়তনের CuSO₄ দ্রবণকে চাইট্রেশনে করতে 0.1 M 20 mL Na₂S₂O₃ দ্রবণ দরকার হয়। প্রদত্ত দ্রবণে কপারের পরিমাণ কত?", options: ["0.064 g","0.127 g","0.021 g","0.210 g"], answer: 1 },
-            { q: "0.376 gm অপরিশুদ্ধ আয়োডাইডকে সম্পূর্ণরূপে বিক্রিয়া করাতে 17.1 cm³ 0.05M Na₂S₂O₃ দ্রবণ লাগে। অপরিশুদ্ধ আয়োডাইডের বিশুদ্ধতা পরদার্জন কর। [I এর পারমাণবিক ভর = 126.9]", options: ["0.30%","15.10%","28.86%","30.00%"], answer: 2 },
-            { q: "K₂MnO₄ নিচের সমীকরণ অনুরূপী অক্সিজেন বর্ণনার উপর কত 20 mL 0.1 M KMnO₄ বিক্রিয়া করবে?", options: ["20 mL 0.5 M H₂C₂O₄ এর সাথে","50 mL 0.1 M H₂C₂O₄ এর সাথে","50 mL 0.5 M H₂C₂O₄ এর সাথে","20 mL 0.1 M H₂C₂O₄ এর সাথে"], answer: 1 }
-          ]
-        },
-        "পরীক্ষা ৩ (প্রশ্ন ৪০৯-৪৩৮)": {
-          examTime: 45,
-          questions: [
-            { q: "অম্লীয় মাধ্যমে 6 g FeSO₄ কে জারিত করতে কত g K₂Cr₂O₇ প্রয়োজন হবে?", options: ["0.97","3.80","5.45","1.94"], answer: 3 },
-            { q: "অম্লীয় দ্রবণে KMnO₄ কবজি ইলেকট্রন গ্রহণ করে?", options: ["3Ti","4Ti","5Ti","6Ti"], answer: 2 },
-            { q: "নিচের কোন জারণ-বিজারণ বিক্রিয়া নয়?", options: ["4LiNO₃ → 2Li₂O + 4NO₂ + O₂","Li₂CO₃ → Li₂O + CO₂","Na₂SO₃ + 2HCl → 2NaCl + SO₂ + H₂O","2NaHCO₃ → Na₂CO₃ + CO₂ + H₂O"], answer: 3 },
-            { q: "H₂SO₄ + K₂Cr₂O₇ + KI এর বিক্রিয়ায় প্রধান উপাদান হলো-", options: ["K-SO₄","Cr₂(SO₄)₃","I₂","Cr₂O₃"], answer: 2 },
-            { q: "H₂SO₄ + K₂Cr₂O₇ + KI এর বিক্রিয়ায় প্রধান উপাদান হলো- (i) Mn এর জারণ সংখ্যা +7 হতে +2 হয় (ii) Mn²⁺ দুটি ইলেকট্রন গ্রহণ করে (iii) n এর মান 10", options: ["i ও ii","ii ও iii","i ও iii","i, ii ও iii"], answer: 2 },
-            { q: "2MnO₄⁻ + 16H⁺ + ne⁻ → 2Mn²⁺ + 8H₂O বিক্রিয়ায়- এখানে Mn এর জারণ সংখ্যা +7 থেকে +2 এ পরিবর্তিত হয়েছে।", options: ["i ও ii","i ও iii","i, ii ও iii","None"], answer: 1 },
-            { q: "আয়রনডাইঅক্সাইড চাইট্রেশনে 1, ছাড়া S₂O₃²⁻ জারিত হলো পরিবর্তন হয়-", options: ["SO₃²⁻","SO₂","SO₄²⁻","S₂O₆²⁻"], answer: 3 },
-            { q: "2S₂O₃²⁻ − 2e ———> S₄O₆²⁻ Note : এটি শুধুমাত্র আয়রনডাইঅক্সাইড চাইট্রেশনে ফেরসই থটে নয় বরং সকল জারণ বিজারণ বিক্রিয়ায় S₂O₃²⁻ জারিত হলে S₄O₆²⁻ এ পরিণত হয়।", options: ["SO₃²⁻","SO₂","S₂O₆²⁻","S₄O₆²⁻"], answer: 3 },
-            { q: "Cu²⁺ + 4NH₃ → [Cu(NH₃)₄]²⁺", options: ["জারণ-বিজারণ","জটিল লবণ গঠন","প্রশমন","অধঃক্ষেপণ"], answer: 1 },
-            { q: "Sn²⁺ আয়নের 1 mol থাকা K₂Cr₂O₇ এর কত mol বিজারিত হবে?", options: ["1/3","3","1/6","6"], answer: 0 },
-            { q: "নিচের বিক্রিয়া বিজারক কোনটি? Co(s)+Cl₂(g) → CoCl₂(s)", options: ["Co জারক (oxidant), Cl₂ বিজারক","Co বিজারক (reductant), Cl₂ জারক","Co এবং Cl₂ উভয়ই বিজারক","Co এবং Cl₂ উভয়ই জারক"], answer: 1 },
-            { q: "একটি লৌহ H₂SO₄ বিশ্লিষ্ট 15 cm³ আয়তনের 0.3 M KMnO₄ দ্রবণ থাকা 25 cm³ আয়তনের H₂O₂ কে জারিত করে। এ দ্রবণে H₂O₂ এর মোলার মাত্রা কত হবে?", options: ["0.45 M","0.54 M","0.045 M","None of these"], answer: 2 },
-            { q: "What will be the values of b and d in the balanced chemical equation? aMnO₂ (aq) + bC₂O₄²⁻ (aq) + cH⁺ (aq)→ dMn²⁺ (aq) + eCO₂(aq) + fH₂O(l)", options: ["2, 5","5, 2","2, 2","5, 5"], answer: 2 },
-            { q: "The reaction : 3Cl⁻(aq) → 2Cl⁻(aq) + ClO₃⁻ (aq) is known as-", options: ["Dissociation","Disproportion","Displacement","Oxidation-Reduction"], answer: 1 },
-            { q: "When KMnO₄ reacts with acidified FeSO₄, then-", options: ["Only FeSO₄ is oxidized","Only KMnO₄ is oxidized","FeSO₄ is oxidized and KMnO₄ is reduced","None of the above"], answer: 2 },
-            { q: "CuSO₄ + KI → Cu₂I₂ + I₂ + K₂SO₄ বিক্রিয়াটিতে কোনটি জারক?", options: ["Cu²⁺","I₂","K⁺","S⁴⁺"], answer: 0 },
-            { q: "Cr₂O₇²⁻ + 14H⁺ + 6e⁻ → 2Cr³⁺ + 7H₂O", options: ["Cr₂O₇²⁻","14H⁺","6e⁻","2Cr³⁺"], answer: 0 },
-            { q: "5 g FeSO₄ কে সম্পূর্ণ জারিত করতে কত গ্রাম K₂Cr₂O₇ প্রয়োজন?", options: ["1.314 g","1.614 g","1.514 g","1.416 g"], answer: 1 },
-            { q: "500 g Fe₂O₃ তে O থাকা বিজারিত করলে কতটুকু Fe পাওয়া যাবে?", options: ["3500 g","350 g","35 g","7000 g"], answer: 1 },
-            { q: "25 cm³ 0.1 M NaCl এর দ্রবণ থেকে সম্পূর্ণরূপে কোনটি বানানো কত mL 0.1 M KMnO₄ এর কত আয়তন প্রয়োজন হবে?", options: ["2.5 cm³","3.0 cm³","4.0 cm³","5.0 cm³"], answer: 2 },
-            { q: "25g Na₂S₂O₃.5H₂O পানিতে দ্রবীভূত করে 1.0L দ্রবণ তৈরি হলে দ্রবণের ঘনমাত্রা কত mL?", options: ["1.04","2.04","4.02","4.01"], answer: 0 },
-            { q: "লৌহ H₂SO₄ এর দ্রবণের 25% থাকা দ্রবণে 0.02 M KMnO₄ দ্রবণের 98.35 cm³ লাগো। প্রকৃত দ্রবণে FeSO₄ এর কত শতাংশ থাকে? [আণবিক ওজন FeSO₄ = 152 এর ঘনমাত্রা = 1.0 M 2 20 এর আয়তন প্রয়োজন হয়। এখানে CuSO₄ এর মোলারিট কত?", options: ["0.0462","0.0923","0.0231","None of the above"], answer: 2 },
-            { q: "3.50g অনার্দ্র ও বিশুদ্ধ FeSO₄ কে স সম্পূর্ণ জারিত করতে কত গ্রাম K₂CrO₇ লাগবে?", options: ["6.7764 g","3.3882 g","2.2580 g","1.1294 g"], answer: 3 },
-            { q: "20 cm³ আয়তনের প্রদত্ত মোল দ্রবণকে চাইট্রেশনে করতে 0.1 M 10 cm³ আয়তনের KMnO₄ প্রয়োজন হয়। ঐ দ্রবণে আয়তনের পরিমাণ কত?", options: ["0.558 g","2.790 g","0.00558 g","0.279 g"], answer: 3 },
-            { q: "K₂Cr₂O₇ + 7H₂SO₄ + 6FeSO₄ → 3Fe₂(SO₄)₃ + K₂SO₄ + Cr₂(SO₄)₃ + 7H₂O", options: ["1.3","1.5","1.6","2.3"], answer: 2 },
-            { q: "100 g Na₂C₂O₄ কে অম্লীয় দ্রবণে জারিত করতে কত পরিমাণ KMnO₄ প্রয়োজন?", options: ["17.0 gm","27.16 gm","37.16 gm","57.16 gm"], answer: 1 },
-            { q: "নিচের কোনটি Redox বিক্রিয়া নয়?", options: ["AgNO₃(aq) + NaCl(aq) = AgCl(s) + NaNO₃(aq)","2Na(s) + Cl₂(g) = 2NaCl(s)","CuSO₄(aq) + Fe(s) = FeSO₄(aq) + Cu(s)","2Cu(NO₃)₂ → 2CuO(s) + 4NO₂(s)"], answer: 0 },
-            { q: "Cu(s) + 2H₂SO₄(l) → CuSO₄(aq) + 2H₂O(l) + SO₂(g)", options: ["Cu(s) + 2H₂SO₄(aq) → CuSO₄(aq) + 2H₂O(l)","Pb(CH₃COO)₂(aq) + H₂S(g) → 2CH₃COOH(aq) + PbS(s) + H₂O(l)","Al₂O₃(s) + 2NaOH(aq) → 2NaAlO₂(aq) + H₂O(l)","Zn(s) + H₂SO₄(aq) → ZnSO₄(aq) + H₂(g)"], answer: 1 },
-            { q: "পঞ্চশতাব্দী এসিড বা সালফিউরিক অম্লীয় দ্রবণে SO₂ চালনা করা হলে কোনটিতে সালফিউরিক এসিডের জারণ সংখ্যার পরিবর্তন হলো-", options: ["+5 to +3","+7 to +4","+6 to +3","+4 to +2"], answer: 2 },
-            { q: "নিম্নলিখিত বিক্রিয়াটি ফসফরাস সালফিউরিক অম্লীয় মাধ্যমে সম্পাদিত হলো। ঐ বিক্রিয়ার কোনটিয়া pH কত?", options: ["4","6","8","7"], answer: 3 }
-          ]
-        }
-      }
-    }
-  }
-},
-  "বিজ্ঞান": {
+  "রসায়ন": {
     chapters: {
-      "অধ্যায় ১: উদ্ভিদবিজ্ঞান": {
+      "অধ্যায় ১: পরিমাণগত রসায়ন": {
         exams: {
           "পরীক্ষা ১": {
             examTime: 10,
             questions: [
-              { q: "উদ্ভিদ কোন প্রক্রিয়ায় খাদ্য তৈরি করে?", options: ["শ্বসন","সালোকসংশ্লেষণ","প্রস্বেদন","পরাগায়ন"], answer: 1 },
-              { q: "পানির রাসায়নিক সংকেত কী?", options: ["CO2","H2O","O2","NaCl"], answer: 1 },
-              { q: "কোনটি নবায়নযোগ্য শক্তি?", options: ["কয়লা","সৌরশক্তি","প্রাকৃতিক গ্যাস","পেট্রোল"], answer: 1 },
-              { q: "পৃথিবীতে কত শতাংশ জল আছে?", options: ["৫০%","৬০%","৭১%","৮০%"], answer: 2 },
-              { q: "কোন গ্যাস গ্রিনহাউস প্রভাব সৃষ্টি করে?", options: ["অক্সিজেন","নাইট্রোজেন","কার্বন ডাই অক্সাইড","হাইড্রোজেন"], answer: 2 }
+              { q: "নিচের কোনটিতে বেশি পরমাণু আছে?", options: ["1.10 g of hydrogen atoms","14.7 g of chromium atoms","2.0 g of helium atoms","7.0 g of nitrogen atoms"], answer: 0 },
+              { q: "প্রমাণ তাপমাত্রা ও চাপে (STP) কোন গ্যাসের 1.0 গ্রাম সবচেয়ে বেশি আয়তন দখল করবে?", options: ["N₂","H₂","O₂","Ar"], answer: 1 },
+              { q: "প্রমাণ অবস্থায় 10.0 L নিচের গ্যাসে অণুর সংখ্যা কত?", options: ["2.689 × 10²³","26.89 × 10²³","0.2689 × 10²³","26.89 × 10²⁵"], answer: 0 },
+              { q: "STP তে 2240 mL CO₂ গ্যাসের ওজন কত?", options: ["4.0 g","4.4 g","8.8 g","8.0 g"], answer: 1 },
+              { q: "18 g গ্লুকোজ কতগুলো কার্বন অণু থাকবে?", options: ["6.0 × 10²³","6.0 × 10²²","3.6 × 10²³","3.6 × 10²⁴"], answer: 2 },
+              { q: "7.1 g ক্লোরিনে মধ্যে কত মোল Cl₂ থাকবে?", options: ["0.1 mol","1.0 mol","0.2 mol","0.4 mol"], answer: 0 },
+              { q: "1.8 g পানিতে কতগুলো পানির অণু থাকবে?", options: ["60.23 × 10²³","0.6023 × 10²²","6.023 × 10²²","6.036 × 10²³"], answer: 2 },
+              { q: "24.5 g H₂SO₄ এ কত মোল বিদ্যমান?", options: ["2.5 mol","0.25 mol","0.025 mol","25 mol"], answer: 2 },
+              { q: "0.1g H₂ গ্যাসে কতটি অণু আছে?", options: ["6.023 × 10²³","6.023 × 10²²","3.023 × 10²²","3.023 × 10²³"], answer: 1 },
+              { q: "1000 mL 0.1 M Na₂S₂O₃ এ Na⁺ এর পরিমাণ কত?", options: ["2.3 g","0.16 g","0.23 g","4.6 g"], answer: 2 }
             ]
-          }
-        }
-      },
-      "অধ্যায় ২: প্রাণিবিজ্ঞান": {
-        exams: {
-          "পরীক্ষা ১": {
+          },
+          "পরীক্ষা ২": {
+            examTime: 10,
             questions: [
-              { q: "মানুষের হৃৎপিণ্ডে কয়টি প্রকোষ্ঠ থাকে?", options: ["২টি","৩টি","৪টি","৫টি"], answer: 2 },
-              { q: "মানবদেহে কত টি হাড় আছে?", options: ["১০৬","২০৬","৩০৬","৪০৬"], answer: 1 },
-              { q: "রক্তের লোহিত কণিকার কাজ কী?", options: ["অক্সিজেন পরিবহন","রোগ প্রতিরোধ","রক্ত জমাট বাঁধা","পুষ্টি পরিবহন"], answer: 0 }
+              { q: "0.01 M 600 mL এ C₆H₁₂O₆ কত গ্রাম থাকে?", options: ["1.08 g","10.8 g","0.108 g","1.8 g"], answer: 0 },
+              { q: "কোন যৌগে C = 18.5%, H = 1.55%, Cl = 55.04%, O = 23.81% উপস্থিত আছে। যৌগটির সংকেত কী হতে পারে?", options: ["CHClO","ClCH₂O","CH₂ClO","C₂H₂OCl"], answer: 0 },
+              { q: "বায়ুতে ব্যবহৃত একটি সারে 30% ফসফরাস P₄O₅ হিসেবে থাকে, যা পানিতে দ্রবণীয়। উক্ত সারে ফসফরাসের পরিমাণ কত?", options: ["6.55%","13.1%","26.2%","30.0%"], answer: 1 },
+              { q: "হাইড্রোজেনের পারমাণবিক ভর 1 গ্রাম এ কয়টি অর্ধ কণা?", options: ["একটি হাইড্রোজেন পরমাণুর ভর এক গ্রাম","দুটি হাইড্রোজেন পরমাণুর ভর এক গ্রাম","6.023×10²³ সংখ্যক হাইড্রোজেন পরমাণুর ভর এক গ্রাম","6.023×10²³ সংখ্যক হাইড্রোজেন অণুর ভর এক গ্রাম"], answer: 2 },
+              { q: "10 g CaCO₃ থেকে 2 × 10²⁰ টি অণু সরিয়ে নিলে কতটুকু CaCO₃ অবশিষ্ট থাকবে?", options: ["9.550 g","9.966 g","9.881 g","9.662 g"], answer: 2 },
+              { q: "5 g CO₂ গ্যাসে কতটি অণু থাকে?", options: ["6.84 × 10²²","6.0 × 10²²","6.68 × 10¹⁸","5.84 × 10²²"], answer: 0 },
+              { q: "পানিতে H₂ এর শতকরা ভর-", options: ["50.0","33.0","10.5","11.1"], answer: 3 },
+              { q: "1.032 g O₂ এবং 0.573 g CO₂ এর মিশ্রণ CO₂ এর মোল ভগ্নাংশ কত?", options: ["0.1677","0.287","0.713","0.8323"], answer: 2 },
+              { q: "STP তে এক মোল SO₂ গ্যাসের আয়তন কত?", options: ["22.40 L","24.78 L","2400.00 L","223.00 L"], answer: 1 },
+              { q: "10% Na₂CO₃দ্রবণ কত মোল দ্রব আছে?", options: ["0.2","0.09","0.11","0.08"], answer: 1 }
+            ]
+          },
+          "পরীক্ষা ৩": {
+            examTime: 10,
+            questions: [
+              { q: "16 g অক্সিজেন গ্যাসে কয়টি অক্সিজেন অণু থাকে?", options: ["3.011 × 10²³টি","3.011 × 10²²টি","2.03 × 10²³টি","2.032 × 10²³টি"], answer: 0 },
+              { q: "এক mol CH₃OH এ কতটি পরমাণু থাকে?", options: ["12.0 × 10²³","6","6.0 × 10","3.6 × 10²⁴"], answer: 3 },
+              { q: "20% H₂SO₄ দ্রবণে পানির শতকরা পরিমাণ কত?", options: ["20 g","80 g","100 g","120 g"], answer: 1 },
+              { q: "32 g অক্সিজেনে অণুর সংখ্যা-", options: ["6.844 × 10²²","2 × 10⁵","6.023 × 10²³","2.99 × 10²³"], answer: 2 },
+              { q: "0.44 g CO₂ গ্যাসে কত মোল CO₂ থাকে?", options: ["0.1 mol","0.001 mol","0.001 mol","0.01 mol"], answer: 3 },
+              { q: "ফ্লুটিন-এ 40% কার্বন এবং 6.67% হাইড্রোজেন আছে বিধায় নিচের কোনটি ভুল?", options: ["ফ্লুটিন-এ অক্সিজেনের পরিমাণ- 53.33%","কার্বন পরমাণু এর আপেক্ষিক নগদ- 3.33%","হাইড্রোজেন পরমাণু এর আপেক্ষিক নগদ- 6.67","অক্সিজেন পরমাণু এর আপেক্ষিক নগদ- 53.33"], answer: 2 },
+              { q: "নিচের কোনটি সঠিক নয়?", options: ["CO₂ এর একটি অণুর ভর হলো 7.3065426 × 10⁻²³g","1 টি সোডিয়াম পরমাণুর ভর = 3.82 × 10⁻²³g","1g হাইড্রোজেনে 6.022 × 10²³ টি হাইড্রোজেন পরমাণু আছে","16g অক্সিজেনে অণুর সংখ্যা = 3.011 × 10²³ g"], answer: 2 },
+              { q: "Na, C এবং O এর পারমাণবিক ভর যথাক্রমে 23, 12 ও 16 হলে, Na₂CO₃ সম্পর্কে নিচের কোনটি সঠিক নয়?", options: ["কার্বনের শতকরা পরিমাণ = 11.3%","Na₂CO₃ এর আপেক্ষিক ভর = 106","সোডিয়ামের শতকরা পরিমাণ = 43.3%","অক্সিজেনের শতকরা পরিমাণ = 55.3%"], answer: 2 },
+              { q: "আয়তোগ্যাজ্ঞো সংখ্যার মান নিচের কোনটি?", options: ["6.02 × 10⁻²³","1.66 × 10⁻²⁴","6.02 × 10²³","22.4"], answer: 2 },
+              { q: "নিচের কোনটি হাইড্রোজেনের একটি পরমাণুর ভর (g)?", options: ["1.67 × 10⁻²⁴","1.67 × 10⁻²⁴","1.67 × 10⁻²⁵","1.67 × 10⁻²³"], answer: 0 }
             ]
           }
         }
       }
     }
-  }
+  },
+
+  
 };
 
-const TEACHER_WHATSAPP_NUMBER = ""; 
+const TEACHER_WHATSAPP_NUMBER = "8801995125480"; 
 const QUESTIONS_PER_PAGE = 10;
 
 const accentPalette = ["var(--accent-blue)","var(--accent-red)","var(--accent-green)","var(--accent-plum)","var(--accent-gold)"];
@@ -854,11 +608,26 @@ let state = {
 
 const $ = (id)=>document.getElementById(id);
 
-function toast(msg){
-  const t = $("toast"); 
-  t.textContent = msg; 
+function toast(msg, type="info", duration=2600){
+  const icons = {
+    success: "✅",
+    error: "❌",
+    warning: "⚠️",
+    info: "ℹ️"
+  };
+
+  const t = $("toast");
+  t.className = "toast " + type;
+  t.innerHTML = `
+    <span class="toast-icon">${icons[type] || "ℹ️"}</span>
+    <span class="toast-text">${msg}</span>
+  `;
   t.classList.add("show");
-  setTimeout(()=>t.classList.remove("show"), 1800);
+
+  clearTimeout(t._timer);
+  t._timer = setTimeout(()=>{
+    t.classList.remove("show");
+  }, duration);
 }
 
 function bnNum(n){
@@ -965,7 +734,7 @@ $("btnCancelName").addEventListener("click", ()=>{
 $("btnStartExam").addEventListener("click", ()=>{
   const name = $("studentName").value.trim();
   if(!name){
-    toast("আগে তোমার নাম লিখো");
+    toast("আগে তোমার নাম লিখো", "warning");
     $("studentName").focus();
     return;
   }
@@ -1000,6 +769,7 @@ function startExam(){
   
   renderPage();
   startTimer();
+  toast(`🎯 ${state.studentName}, পরীক্ষা শুরু হয়েছে। শুভকামনা!`, "success", 3500);
 }
 
 function startTimer(){
@@ -1010,7 +780,7 @@ function startTimer(){
     updateTimerText();
     if(state.timeLeft <= 0){
       clearInterval(state.timerId);
-      toast("সময় শেষ! পরীক্ষা জমা দেওয়া হচ্ছে...");
+      toast("সময় শেষ! পরীক্ষা জমা দেওয়া হচ্ছে...", "warning");
       finishExam();
     }
   },1000);
@@ -1057,14 +827,13 @@ function renderPage(){
         e.preventDefault();
         state.answers[i] = optIdx;
         
-        // শুধু এই প্রশ্নের অপশনগুলো আপডেট করো
         const allOptions = optionsBox.querySelectorAll('.option');
         allOptions.forEach(opt => opt.classList.remove('selected'));
         b.classList.add('selected');
         
-        // প্রগ্রেস বার আপডেট
         const answeredCount = state.answers.filter(a => a !== null).length;
         $("progressFill").style.width = (answeredCount/total*100)+"%";
+        toast("উত্তরটি সিলেক্ট করা হয়েছে ✓", "success", 1000);
       });
       optionsBox.appendChild(b);
     });
@@ -1104,10 +873,63 @@ $("btnNextPage").addEventListener("click", ()=>{
 
 $("btnSubmitExam").addEventListener("click", ()=>{
   const unanswered = state.answers.filter(a=>a===null).length;
-  if(unanswered>0){
-    if(!confirm(`${bnNum(unanswered)}টা প্রশ্নের উত্তর দেওয়া হয়নি। তবুও জমা দিতে চাও?`)) return;
+
+  if(unanswered > 0){
+    showSubmitWarning(unanswered);
+    return;
   }
-  finishExam();
+
+  submitExamNow();
+});
+
+function showSubmitWarning(unanswered){
+  const modal = $("submitWarningModal");
+  const text = $("submitWarningText");
+
+  text.innerHTML = `
+    <strong style="color:var(--accent-red);">
+      ${bnNum(unanswered)}টি প্রশ্ন
+    </strong>
+    এর উত্তর এখনো দেওয়া হয়নি।<br>
+    তবুও কি তুমি পরীক্ষাটি জমা দিতে চাও?
+  `;
+
+  modal.classList.add("show");
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function closeSubmitWarning(){
+  const modal = $("submitWarningModal");
+  modal.classList.remove("show");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+function submitExamNow(){
+  closeSubmitWarning();
+  toast("📤 পরীক্ষা জমা নেওয়া হচ্ছে...", "success");
+
+  setTimeout(()=>{
+    finishExam();
+  }, 500);
+}
+
+$("btnCancelSubmit").addEventListener("click", closeSubmitWarning);
+
+$("btnConfirmSubmit").addEventListener("click", submitExamNow);
+
+$("submitWarningModal").addEventListener("click", (e)=>{
+  if(e.target === $("submitWarningModal")){
+    closeSubmitWarning();
+  }
+});
+
+document.addEventListener("keydown", (e)=>{
+  if(e.key === "Escape"){
+    const modal = $("submitWarningModal");
+    if(modal.classList.contains("show")){
+      closeSubmitWarning();
+    }
+  }
 });
 
 function finishExam(){
@@ -1121,39 +943,63 @@ function showResult(){
   const questions = examData[state.selectedSubject].chapters[state.selectedChapter].exams[state.selectedExam].questions;
   const total = questions.length;
   let correct = 0;
-  questions.forEach((q,i)=>{ if(state.answers[i]===q.answer) correct++; });
-  const percent = Math.round(correct/total*100);
+
+  questions.forEach((q,i)=>{
+    if(state.answers[i] === q.answer) correct++;
+  });
+
+  const percent = Math.round(correct / total * 100);
 
   hideAllScreens();
   $("screen-result").hidden = false;
+
   $("scoreBig").textContent = `${bnNum(correct)} / ${bnNum(total)}`;
   $("scoreSub").textContent = `${state.studentName} — ${state.selectedSubject} (${bnNum(percent)}%)`;
 
-  let remark = "আরেকটু চেষ্টা করলে ভালো হবে।";
-  if(percent>=80) remark = "চমৎকার ফলাফল! 🎉";
-  else if(percent>=60) remark = "ভালো করেছো।";
-  else if(percent>=40) remark = "মোটামুটি, আরও প্র্যাকটিস দরকার।";
+  let remark = "📚 চিন্তা করো না। আবার চেষ্টা করো, তুমি পারবে!";
+  if(percent >= 90) remark = "🏆 অসাধারণ! তোমার প্রস্তুতি দারুণ।";
+  else if(percent >= 80) remark = "🎉 চমৎকার! খুব ভালো করেছো।";
+  else if(percent >= 70) remark = "🔥 দারুণ! আরেকটু practice করলে আরও ভালো হবে।";
+  else if(percent >= 50) remark = "👍 ভালো চেষ্টা। ভুলগুলো দেখে আবার practice করো।";
+
   $("scoreRemark").textContent = remark;
 
-  const tags = ["ক","খ","গ","ঘ"];
+  // Only admin can see correct answers
+  const isAdmin = state.studentName.trim().toLowerCase() === "admin";
+
+  const reviewTitle = $("reviewTitle");
   const reviewBox = $("reviewBox");
-  reviewBox.innerHTML = "";
-  questions.forEach((q,i)=>{
-    const userAns = state.answers[i];
-    const isOk = userAns === q.answer;
-    const div = document.createElement("div");
-    div.className = "review-item " + (isOk ? "ok" : "bad");
-    div.innerHTML = `
-      <div class="rq">${bnNum(i+1)}. ${q.q}</div>
-      <div class="ra">
-        তোমার উত্তর: <b>${userAns===null ? "উত্তর দাওনি" : tags[userAns]+" — "+q.options[userAns]}</b><br>
-        সঠিক উত্তর: <b>${tags[q.answer]} — ${q.options[q.answer]}</b>
-      </div>`;
-    reviewBox.appendChild(div);
-  });
+
+  if(!isAdmin){
+    reviewTitle.hidden = true;
+    reviewBox.hidden = true;
+  } else {
+    reviewTitle.hidden = false;
+    reviewBox.hidden = false;
+    reviewBox.innerHTML = "";
+
+    const tags = ["ক","খ","গ","ঘ"];
+
+    questions.forEach((q,i)=>{
+      const userAns = state.answers[i];
+      const isOk = userAns === q.answer;
+
+      const div = document.createElement("div");
+      div.className = "review-item " + (isOk ? "ok" : "bad");
+
+      div.innerHTML = `
+        <div class="rq">${bnNum(i+1)}. ${q.q}</div>
+        <div class="ra">
+          তোমার উত্তর: <b>${userAns===null ? "উত্তর দাওনি" : tags[userAns]+" — "+q.options[userAns]}</b><br>
+          সঠিক উত্তর: <b>${tags[q.answer]} — ${q.options[q.answer]}</b>
+        </div>`;
+
+      reviewBox.appendChild(div);
+    });
+  }
 
   const resultText =
-`পরীক্ষা কেন্দ্র — ফলাফল
+`AR Bijoy's Exam Center — ফলাফল
 নাম: ${state.studentName}
 সাবজেক্ট: ${state.selectedSubject}
 অধ্যায়: ${state.selectedChapter}
@@ -1161,16 +1007,21 @@ function showResult(){
 স্কোর: ${correct} / ${total} (${percent}%)`;
 
   $("btnCopyResult").onclick = ()=>{
-    navigator.clipboard.writeText(resultText).then(()=>toast("ফলাফল কপি হয়েছে")).catch(()=>toast("কপি করা যায়নি"));
+    navigator.clipboard.writeText(resultText)
+      .then(()=>toast("ফলাফল কপি হয়েছে", "success"))
+      .catch(()=>toast("কপি করা যায়নি", "error"));
   };
 
   const waBtn = $("btnWhatsapp");
+
   if(TEACHER_WHATSAPP_NUMBER.trim()){
     waBtn.hidden = false;
     waBtn.href = `https://wa.me/${TEACHER_WHATSAPP_NUMBER.trim()}?text=${encodeURIComponent(resultText)}`;
   } else {
     waBtn.hidden = true;
   }
+
+  toast("ফলাফল প্রস্তুত হয়েছে", "success");
 }
 
 // ব্যাক বাটন ইভেন্টস
@@ -1190,8 +1041,12 @@ $("btnHome").addEventListener("click", ()=>{
   $("topSub").textContent = "সাবজেক্ট বেছে নিয়ে পরীক্ষা শুরু করো";
 });
 
-// প্রথমে সাবজেক্ট লিস্ট দেখাও
+// প্রথমে সাবজেক্ট লিস্ট দেখাও এবং Welcome message
 renderSubjects();
+
+setTimeout(()=>{
+  toast("Welcome to AR Bijoy's Exam Center", "info");
+}, 600);
 </script>
 </body>
 </html>

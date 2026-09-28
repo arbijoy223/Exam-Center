@@ -60,6 +60,13 @@ background:var(--card);border:1px solid rgba(255,255,255,.9);border-radius:22px;
 .option .opt-tag{flex-shrink:0;width:31px;height:31px;border-radius:9px;background:#e9edf5;border:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#596579}
 .option.selected{border-color:var(--primary);background:linear-gradient(135deg,rgba(99,91,255,.10),rgba(139,92,246,.07));box-shadow:0 7px 20px rgba(99,91,255,.10)}
 .option.selected .opt-tag{color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary2))}
+
+/* Answer Sheet Custom Option Colors */
+.option.correct-ans{border-color:#16a34a !important;background:rgba(22,163,74,0.08) !important}
+.option.correct-ans .opt-tag{color:#fff !important;background:#16a34a !important}
+.option.wrong-ans{border-color:#ef4444 !important;background:rgba(239,68,68,0.08) !important}
+.option.wrong-ans .opt-tag{color:#fff !important;background:#ef4444 !important}
+
 .page-label{font-size:13.5px;color:var(--muted);text-align:center;margin:-4px 0 14px}
 .nav-row{display:flex;justify-content:space-between;gap:10px;margin-top:7px;flex-wrap:wrap;position:sticky;bottom:10px;z-index:20;padding:10px;border-radius:18px;background:rgba(255,255,255,.88);backdrop-filter:blur(15px);box-shadow:0 10px 30px rgba(15,23,42,.10)}
 .btn{min-height:48px;font-size:15px;font-weight:700;padding:11px 19px;border-radius:14px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;transition:.22s}
@@ -70,7 +77,6 @@ background:var(--card);border:1px solid rgba(255,255,255,.9);border-radius:22px;
 .score-big{position:relative;font-family:var(--serif);font-size:58px;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--primary2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .score-sub{color:var(--muted);margin-top:6px;font-size:15px}.score-remark{margin-top:10px;font-size:17px;font-weight:700}
 .result-stat-grid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:23px 0 0}.result-stat{padding:15px 10px;border-radius:16px;background:#f6f7fb}.result-stat strong{display:block;font-size:22px;font-weight:900}.result-stat span{font-size:13px;color:var(--muted)}
-.review-item{border:1px solid var(--border);border-left-width:5px;border-radius:14px;padding:15px;margin-bottom:11px;background:var(--card);box-shadow:0 5px 18px rgba(15,23,42,.04)}.review-item.ok{border-left-color:var(--ok-line)}.review-item.bad{border-left-color:var(--bad-line)}.review-item .rq{font-size:15px;margin-bottom:8px;font-weight:700}.review-item .ra{font-size:13.5px;color:var(--muted);line-height:1.7}.review-item .ra b{color:var(--text)}
 .action-row{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
 .toast{position:fixed;top:88px;right:20px;z-index:2000;min-width:280px;max-width:390px;display:flex;align-items:center;gap:12px;padding:14px 17px;border-radius:17px;color:#fff;background:rgba(17,24,39,.95);box-shadow:0 18px 45px rgba(15,23,42,.25);backdrop-filter:blur(16px);opacity:0;visibility:hidden;transform:translateX(35px) scale(.96);transition:.32s cubic-bezier(.2,.8,.2,1)}
 .toast.show{opacity:1;visibility:visible;transform:translateX(0) scale(1)}.toast.success{background:linear-gradient(135deg,#15803d,#16a34a)}.toast.error{background:linear-gradient(135deg,#b91c1c,#ef4444)}.toast.warning{background:linear-gradient(135deg,#b45309,#f59e0b)}.toast.info{background:linear-gradient(135deg,#4338ca,#635bff)}
@@ -78,7 +84,19 @@ background:var(--card);border:1px solid rgba(255,255,255,.9);border-radius:22px;
 .footnote{font-size:12.5px;color:var(--muted);margin-top:26px;line-height:1.6}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#080c18;--card:rgba(15,23,42,.90);--text:#f1f5f9;--muted:#94a3b8;--border:#263047}.topbar{background:rgba(8,12,24,.82)}.subject-card,.question-card,.score-card,.back-btn,.nav-row{background:rgba(15,23,42,.90)}.option{background:#111827;border-color:#27324a}.option:hover{background:#172033}.modal{background:#111827}.modal input{background:#0b1020;color:#fff;border-color:#334155}.result-stat{background:#111827}}
 @media(max-width:700px){.topbar-inner{padding:10px 14px}.wrap{width:100%;padding:22px 12px 55px}.brand-text{font-size:15px}.brand-sub{font-size:10px}.brand .seal{width:39px;height:39px}.subject-grid{grid-template-columns:1fr;gap:14px}.subject-card{min-height:135px;padding:19px}.lede{margin:20px 0}.lede h2{font-size:29px}.exam-head .subject-name{font-size:17px}.timer{width:100%;min-width:0}.question-card{padding:19px;border-radius:19px}.qtext{font-size:17px}.nav-row{bottom:6px}.nav-row .btn{flex:1;min-width:0;padding-left:10px;padding-right:10px}.score-big{font-size:50px}.result-stat-grid{grid-template-columns:1fr}.toast{left:12px;right:12px;top:76px;min-width:0;max-width:none}.modal{padding:24px}}
-
+/* Exam Header and Progress/Page Label Sticky Container */
+  .exam-sticky-header {
+    position: sticky;
+    top: 70px; /* topbar-er niche thakbe */
+    z-index: 95;
+    background: rgba(244, 247, 251, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 12px 10px 5px;
+    margin: 0 -10px 15px -10px;
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+  }
   /* ---------- Fancy Submit Warning Modal ---------- */
   .fancy-modal{
     position:fixed;
@@ -129,6 +147,63 @@ background:var(--card);border:1px solid rgba(255,255,255,.9);border-radius:22px;
     box-shadow:0 10px 30px rgba(245,158,11,.18);
     animation:warningFloat 2s ease-in-out infinite;
   }
+
+  /* প্রশ্ন কার্ডের সাইজ ও প্যাডিং ছোট করা */
+.question-card{
+  background:rgba(255,255,255,.94);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:12px 16px; /* প্যাডিং কমানো হলো */
+  margin-bottom:10px;
+  box-shadow:0 6px 20px rgba(15,23,42,.05);
+}
+
+/* প্রশ্নের ফন্ট সাইজ ও মার্জিন ছোট করা */
+.qnum{
+  padding:2px 8px;
+  font-size:11.5px;
+  margin-bottom:6px;
+  border-radius:6px;
+}
+.qtext{
+  font-size:15px; /* ফন্ট সাইজ ছোট করা হলো */
+  line-height:1.4;
+  margin-bottom:10px;
+  font-weight:700;
+}
+
+/* অপশনের সাইজ ও প্যাডিং কমানো হলো যাতে স্ক্রিনে একসাথে মানায় */
+.option{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  width:100%;
+  text-align:left;
+  cursor:pointer;
+  padding:8px 12px; /* প্যাডিং কমানো হলো */
+  margin-bottom:6px; /* মার্জিন কমানো হলো */
+  border:1.5px solid #e8ebf2;
+  border-radius:11px;
+  background:#fafbfe;
+  color:var(--text);
+  font-size:14px; /* ফন্ট সাইজ ছোট করা হলো */
+  line-height:1.3;
+  transition:.2s ease;
+}
+.option .opt-tag{
+  flex-shrink:0;
+  width:25px;
+  height:25px;
+  border-radius:7px;
+  background:#e9edf5;
+  border:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:800;
+  color:#596579;
+}
   @keyframes warningFloat{
     0%,100%{transform:translateY(0)}
     50%{transform:translateY(-5px)}
@@ -236,21 +311,22 @@ background:var(--card);border:1px solid rgba(255,255,255,.9);border-radius:22px;
   </section>
 
   <!-- স্ক্রিন ৪: পরীক্ষা চলাকালীন -->
-  <section id="screen-exam" hidden>
-    <div class="exam-head">
-      <h2 class="subject-name" id="examSubjectName"></h2>
-      <div class="timer" id="timerBox">⏱ <span id="timerText">--:--</span></div>
+<!-- স্ক্রিন ৪: পরীক্ষা চলাকালীন -->
+  <section id="screen-exam" hidden style="padding-top: 5px;">
+    <div class="exam-sticky-header" style="padding: 6px 10px 4px; margin-bottom: 8px;">
+      <div class="exam-head" style="margin-bottom: 6px;">
+        <h2 class="subject-name" id="examSubjectName" style="font-size: 17px;"></h2>
+        <div class="timer" id="timerBox" style="padding: 5px 10px; font-size: 15px; min-width: 95px;">⏱ <span id="timerText">--:--</span></div>
+      </div>
+      <div class="progress-track" style="margin-bottom: 6px; height: 6px;"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      <div class="page-label" id="pageLabel" style="margin: 0; font-size: 12px;"></div>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
 
-    <div id="questionsContainer"></div>
+    <div id="questionsContainer" style="margin-top: 5px;"></div>
 
-    <div class="page-label" id="pageLabel"></div>
-
-    <div class="nav-row">
-      <button class="btn" id="btnPrevPage">← আগের পাতা</button>
-      <button class="btn btn-submit" id="btnSubmitExam">পরীক্ষা জমা দাও ✓</button>
-      <button class="btn btn-primary" id="btnNextPage">পরের পাতা →</button>
+    <div class="nav-row" style="margin-top: 10px; padding: 6px;">
+      <button class="btn btn-ghost" id="btnExitExam" style="color:#ef4444; border-color:rgba(239,68,68,0.3); padding: 8px 12px; min-height: 40px;">← হোম (Exit)</button>
+      <button class="btn btn-submit" id="btnSubmitExam" style="padding: 8px 16px; min-height: 40px;">পরীক্ষা জমা দাও ✓</button>
     </div>
   </section>
 
@@ -293,7 +369,6 @@ background:var(--card);border:1px solid rgba(255,255,255,.9);border-radius:22px;
   </div>
 </div>
 
-
 <!-- Fancy Submit Warning Modal -->
 <div class="fancy-modal" id="submitWarningModal" aria-hidden="true">
   <div class="fancy-modal-box" role="dialog" aria-modal="true" aria-labelledby="submitWarningTitle">
@@ -311,7 +386,8 @@ background:var(--card);border:1px solid rgba(255,255,255,.9);border-radius:22px;
 
 <script>
 /* ================================================================
-   পরীক্ষার ডেটা স্ট্রাকচার
+   [!] এ এখানে তোমার examData object টি বসিয়ে নেবে:
+   const examData = { ... };
 ================================================================ */
 const examData = {
   "আইসিটি": {
@@ -2120,8 +2196,8 @@ const examData = {
 },
 };
 
+
 const TEACHER_WHATSAPP_NUMBER = "8801995125480"; 
-const QUESTIONS_PER_PAGE = 10;
 
 const accentPalette = ["var(--accent-blue)","var(--accent-red)","var(--accent-green)","var(--accent-plum)","var(--accent-gold)"];
 
@@ -2130,7 +2206,6 @@ let state = {
   selectedChapter: null,
   selectedExam: null,
   studentName: null,
-  currentPage: 0,
   answers:[], 
   timeLeft:0, 
   timerId:null, 
@@ -2155,6 +2230,7 @@ function bnNum(n){
 }
 
 function hideAllScreens(){
+  window.scrollTo(0, 0);
   $("screen-subjects").hidden = true;
   $("screen-chapters").hidden = true;
   $("screen-exams").hidden = true;
@@ -2265,7 +2341,6 @@ $("btnStartExam").addEventListener("click", ()=>{
   startExam();
 });
 
-// Enter key দিয়ে পরীক্ষা শুরু
 $("studentName").addEventListener("keypress", (e)=>{
   if(e.key === "Enter"){
     $("btnStartExam").click();
@@ -2278,7 +2353,6 @@ function startExam(){
   const questions = examObj.questions;
   const timeInMinutes = examObj.examTime || questions.length;
   
-  state.currentPage = 0;
   state.answers = new Array(questions.length).fill(null);
   state.timeLeft = timeInMinutes * 60;
   state.timerId = null;
@@ -2289,7 +2363,7 @@ function startExam(){
   $("examSubjectName").textContent = `${state.selectedSubject} → ${state.selectedChapter} → ${state.selectedExam}`;
   $("topSub").textContent = state.studentName;
   
-  renderPage();
+  renderAllQuestions();
   startTimer();
   toast(`🎯 ${state.studentName}, পরীক্ষা শুরু হয়েছে। শুভকামনা!`, "success", 3500);
 }
@@ -2314,20 +2388,17 @@ function updateTimerText(){
   $("timerBox").classList.toggle("low", state.timeLeft <= 60);
 }
 
-function renderPage(){
+// শসবগুলো প্রশ্ন একই পেজে রেন্ডার করা (স্কোরযোগ্য/স্ক্রোলযোগ্য)
+function renderAllQuestions(){
   const questions = examData[state.selectedSubject].chapters[state.selectedChapter].exams[state.selectedExam].questions;
   const total = questions.length;
-  const totalPages = Math.ceil(total / QUESTIONS_PER_PAGE);
-  const startIdx = state.currentPage * QUESTIONS_PER_PAGE;
-  const endIdx = Math.min(startIdx + QUESTIONS_PER_PAGE, total);
   
   const container = $("questionsContainer");
   container.innerHTML = "";
   
   const tags = ["ক","খ","গ","ঘ"];
   
-  for(let i = startIdx; i < endIdx; i++){
-    const q = questions[i];
+  questions.forEach((q, i)=>{
     const qCard = document.createElement("div");
     qCard.className = "question-card";
     qCard.id = "question-" + i;
@@ -2365,7 +2436,7 @@ function renderPage(){
         const answeredCount = state.answers.filter(a => a !== null).length;
         $("progressFill").style.width = (answeredCount/total*100)+"%";
         const unansweredCount = total - answeredCount;
-        $("pageLabel").textContent = `পাতা ${bnNum(state.currentPage + 1)} / ${bnNum(totalPages)} • উত্তর দেওয়া ${bnNum(answeredCount)}টি • বাকি ${bnNum(unansweredCount)}টি`;
+        $("pageLabel").textContent = `উত্তর দেওয়া ${bnNum(answeredCount)}টি • বাকি ${bnNum(unansweredCount)}টি`;
       });
       optionsBox.appendChild(b);
     });
@@ -2374,33 +2445,23 @@ function renderPage(){
     qCard.appendChild(qTextDiv);
     qCard.appendChild(optionsBox);
     container.appendChild(qCard);
-  }
+  });
   
   const answeredCount = state.answers.filter(a => a !== null).length;
   $("progressFill").style.width = (answeredCount/total*100)+"%";
-  
   const unansweredCount = total - answeredCount;
-  $("pageLabel").textContent = `পাতা ${bnNum(state.currentPage + 1)} / ${bnNum(totalPages)} • উত্তর দেওয়া ${bnNum(answeredCount)}টি • বাকি ${bnNum(unansweredCount)}টি`;
-  
-  $("btnPrevPage").disabled = state.currentPage === 0;
-  $("btnNextPage").disabled = state.currentPage >= totalPages - 1;
+  $("pageLabel").textContent = `উত্তর দেওয়া ${bnNum(answeredCount)}টি • বাকি ${bnNum(unansweredCount)}টি`;
   
   window.scrollTo(0, 0);
 }
 
-$("btnPrevPage").addEventListener("click", ()=>{ 
-  if(state.currentPage > 0){ 
-    state.currentPage--; 
-    renderPage(); 
-  } 
-});
-
-$("btnNextPage").addEventListener("click", ()=>{
-  const questions = examData[state.selectedSubject].chapters[state.selectedChapter].exams[state.selectedExam].questions;
-  const totalPages = Math.ceil(questions.length / QUESTIONS_PER_PAGE);
-  if(state.currentPage < totalPages - 1){ 
-    state.currentPage++; 
-    renderPage(); 
+// Exit button click handler (হোমপেজে নিয়ে যাবে)
+$("btnExitExam").addEventListener("click", ()=>{
+  if(confirm("তুমি কি পরীক্ষাটি বাতিল করে হোমে ফিরে যেতে চাও?")){
+    clearInterval(state.timerId);
+    hideAllScreens();
+    $("screen-subjects").hidden = false;
+    $("topSub").textContent = "সাবজেক্ট বেছে নিয়ে পরীক্ষা শুরু করো";
   }
 });
 
@@ -2492,7 +2553,7 @@ function showResult(){
   $("statPercent").textContent = `${bnNum(percent)}%`;
 
   let remark = "";
-  let icon = "📚";
+  let icon = "🏆";
   if(percent >= 90){ remark = "🏆 অসাধারণ! তোমার প্রস্তুতি দারুণ।"; icon = "🏆"; }
   else if(percent >= 80){ remark = "🎉 চমৎকার! খুব ভালো করেছো।"; icon = "🎉"; }
   else if(percent >= 70){ remark = "🔥 দারুণ! আরেকটু practice করলে আরও ভালো হবে।"; icon = "🔥"; }
@@ -2500,41 +2561,53 @@ function showResult(){
   else { remark = "📚 চিন্তা করো না। আবার চেষ্টা করো, তুমি পারবে!"; icon = "📚"; }
   $("resultIcon").textContent = icon;
   $("scoreRemark").textContent = remark;
-  $("topSub").textContent = "পরীক্ষার ফলাফল";
-
-  // Only admin can see correct answers
-  const isAdmin = state.studentName.trim().toLowerCase() === "admin";
+  $("topSub").textContent = "পরীক্ষার ফলাফল ঠিক আছে";
 
   const reviewTitle = $("reviewTitle");
   const reviewBox = $("reviewBox");
 
-  if(!isAdmin){
-    reviewTitle.hidden = true;
-    reviewBox.hidden = true;
-  } else {
-    reviewTitle.hidden = false;
-    reviewBox.hidden = false;
-    reviewBox.innerHTML = "";
+  reviewTitle.hidden = false;
+  reviewBox.hidden = false;
+  reviewBox.innerHTML = "";
 
-    const tags = ["ক","খ","গ","ঘ"];
+  const tags = ["ক","খ","গ","ঘ"];
 
-    questions.forEach((q,i)=>{
-      const userAns = state.answers[i];
-      const isOk = userAns === q.answer;
+  // উত্তরপত্র একেবারে প্রশ্ন পেজের মতো ডেসক্রিপশনসহ রেন্ডার করা (সঠিক সবুজ, ভুল লাল)
+  questions.forEach((q,i)=>{
+    const userAns = state.answers[i];
+    const correctAns = q.answer;
 
-      const div = document.createElement("div");
-      div.className = "review-item " + (isOk ? "ok" : "bad");
+    const qCard = document.createElement("div");
+    qCard.className = "question-card";
+    
+    const qNumDiv = document.createElement("div");
+    qNumDiv.className = "qnum";
+    qNumDiv.textContent = `প্রশ্ন ${bnNum(i+1)} / ${bnNum(total)}`;
+    
+    const qTextDiv = document.createElement("div");
+    qTextDiv.className = "qtext";
+    qTextDiv.textContent = q.q;
+    
+    const optionsBox = document.createElement("div");
+    q.options.forEach((opt, optIdx)=>{
+      const b = document.createElement("div");
+      b.className = "option";
+      
+      if(optIdx === correctAns){
+        b.classList.add("correct-ans"); // সঠিক উত্তর সবুজ রঙ
+      } else if(optIdx === userAns && userAns !== correctAns){
+        b.classList.add("wrong-ans"); // ব্যবহারকারীর ভুল সিলেক্ট করা অপশন লাল রঙ
+      }
 
-      div.innerHTML = `
-        <div class="rq">${bnNum(i+1)}. ${q.q}</div>
-        <div class="ra">
-          তোমার উত্তর: <b>${userAns===null ? "উত্তর দাওনি" : tags[userAns]+" — "+q.options[userAns]}</b><br>
-          সঠিক উত্তর: <b>${tags[q.answer]} — ${q.options[q.answer]}</b>
-        </div>`;
-
-      reviewBox.appendChild(div);
+      b.innerHTML = `<span class="opt-tag">${tags[optIdx]}</span><span>${opt}</span>`;
+      optionsBox.appendChild(b);
     });
-  }
+    
+    qCard.appendChild(qNumDiv);
+    qCard.appendChild(qTextDiv);
+    qCard.appendChild(optionsBox);
+    reviewBox.appendChild(qCard);
+  });
 
   const resultText =
 `AR Bijoy's Exam Center — ফলাফল
@@ -2562,7 +2635,6 @@ function showResult(){
   toast(`🎉 ${state.studentName}, তোমার ফলাফল প্রস্তুত!`, "success", 3500);
 }
 
-// ব্যাক বাটন ইভেন্টস
 $("backToSubjects").addEventListener("click", ()=>{
   hideAllScreens();
   $("screen-subjects").hidden = false;
@@ -2579,7 +2651,6 @@ $("btnHome").addEventListener("click", ()=>{
   $("topSub").textContent = "সাবজেক্ট বেছে নিয়ে পরীক্ষা শুরু করো";
 });
 
-// প্রথমে সাবজেক্ট লিস্ট দেখাও এবং Welcome message
 renderSubjects();
 
 setTimeout(()=>{
